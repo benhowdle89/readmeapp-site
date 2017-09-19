@@ -1,12 +1,18 @@
 <template lang="pug">
   .index
     h1 index
-    login
+    timeline(v-if="user")
+    login(v-else)
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Login from './../components/login'
+import Timeline from './../components/timeline'
 export default {
-  components: { Login }
+  computed: {
+    ...mapState(['user'])
+  },
+  components: { Login, Timeline }
 }
 </script>

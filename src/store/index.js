@@ -11,7 +11,6 @@ const state = {
   user: null,
   oAuthToken: null,
   oAuthTokenSecret: null,
-  oAuthVerifier: null,
   oAuthAccessToken: null,
   oAuthAccessTokenSecret: null,
   tweets: [],

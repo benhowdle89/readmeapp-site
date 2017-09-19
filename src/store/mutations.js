@@ -19,6 +19,9 @@ export default {
   [types.SET_USER] (state, { user }) {
     state.user = user
   },
+  [types.SET_TWEETS] (state, { tweets }) {
+    state.tweets = tweets
+  },
   [types.SET_LAST_FETCHED] (state, { lastFetched }) {
     state.lastFetched = lastFetched
   }

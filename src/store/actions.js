@@ -36,3 +36,14 @@ export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSec
     r()
   })
 }
+
+export const fetchTweets = async ({ commit, state }) => {
+  const { oAuthAccessToken, oAuthAccessTokenSecret } = state
+  const { data } = await api.fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret)
+  commit(types.SET_TWEETS, {
+    tweets: data
+  })
+  commit(types.SET_LAST_FETCHED, {
+    lastFetched: new Date()
+  })
+}
