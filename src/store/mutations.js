@@ -22,6 +22,9 @@ export default {
   [types.SET_TWEETS] (state, { tweets }) {
     state.tweets = tweets
   },
+  [types.TWEETS_LOADING] (state, { loading }) {
+    state.tweetsLoading = loading
+  },
   [types.SET_LAST_FETCHED] (state, { lastFetched }) {
     state.lastFetched = lastFetched
   },

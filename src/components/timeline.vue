@@ -1,5 +1,5 @@
 <template lang="pug">
-  .timeline
+  .timeline(v-loading="tweetsLoading")
     user
     button(v-if="canFetchTweets", @click="fetchTweets") Fetch tweets
     tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
@@ -29,7 +29,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['tweets', 'lastFetched', 'fetchTweetError']),
+    ...mapState(['tweets', 'lastFetched', 'fetchTweetError', 'tweetsLoading']),
     canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) }
   },
   mounted () {
