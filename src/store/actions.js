@@ -54,7 +54,7 @@ export const fetchTweets = async ({ commit, state }) => {
       lastFetched: new Date()
     }) 
   } catch (error) {
-    const message = !error.status ? 'API error' : error
+    const message = error.response ? error.response.data.errors : 'API Error'
     commit(types.FETCH_TWEET_ERROR, {
       fetchTweetError: message
     })
