@@ -16,10 +16,11 @@ export default {
     })
     return data
   },
-  async fetchTweets (accessToken, accessTokenSecret) {
+  async fetchTweets (accessToken, accessTokenSecret, userId) {
     const { data } = await instance.post('?type=tweets', {
       accessToken,
-      accessTokenSecret
+      accessTokenSecret,
+      userId
     })
     return data
   }

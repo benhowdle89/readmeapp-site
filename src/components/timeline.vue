@@ -1,5 +1,6 @@
 <template lang="pug">
   .timeline
+    user
     button(v-if="canFetchTweets", @click="fetchTweets") Fetch tweets
     tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
@@ -7,6 +8,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import { haveFetchedInWindow } from './../helpers'
+import User from './user'
 import Tweet from './tweet'
 export default {
   methods: {
@@ -29,6 +31,6 @@ export default {
   destroyed () {
     clearInterval(this.timer)
   },
-  components: { Tweet }
+  components: { Tweet, User }
 }
 </script>
