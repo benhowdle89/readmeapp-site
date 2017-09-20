@@ -12,7 +12,15 @@ import User from './user'
 import Tweet from './tweet'
 export default {
   methods: {
-    ...mapActions(['fetchTweets'])
+    ...mapActions(['fetchTweets', 'clearFetchTweetError']),
+    showError (message, type) {
+      this.$message({
+        showClose: true,
+        message,
+        type: 'error',
+        onClose: () => { this.clearFetchTweetError() }
+      })
+    }
   },
   data () {
     return {
@@ -21,12 +29,20 @@ export default {
     }
   },
   computed: {
-    ...mapState(['tweets', 'lastFetched']),
+    ...mapState(['tweets', 'lastFetched', 'fetchTweetError']),
     canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) }
   },
   mounted () {
     !this.tweets.length && this.fetchTweets()
     this.timer = setInterval(() => { this.now = Date.now() }, 1000)
+    if (this.fetchTweetError) {
+      this.showError(this.fetchTweetError)
+    }
+  },
+  watch: {
+    fetchTweetError: function (error) {
+      error && this.showError(this.fetchTweetError)
+    }
   },
   destroyed () {
     clearInterval(this.timer)

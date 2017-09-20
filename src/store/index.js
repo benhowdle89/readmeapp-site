@@ -14,7 +14,10 @@ const state = {
   oAuthAccessToken: null,
   oAuthAccessTokenSecret: null,
   tweets: [],
-  lastFetched: null
+  lastFetched: null,
+  fetchTweetError: null,
+  requestTokenError: null,
+  requestAccessTokenError: null
 }
 
 export default new Vuex.Store({
