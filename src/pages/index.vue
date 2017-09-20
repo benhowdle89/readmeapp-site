@@ -1,6 +1,5 @@
 <template lang="pug">
   .index
-    h1 index
     timeline(v-if="user")
     login(v-else)
 </template>
