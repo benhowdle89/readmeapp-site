@@ -6,13 +6,16 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState(['oAuthTokenSecret'])
+    ...mapState(['oAuthToken', 'oAuthTokenSecret'])
   },
   methods: {
     ...mapActions(['requestAccessToken'])
   },
   async mounted () {
     const { query: { oauth_token, oauth_verifier } } = this.$route
+    if (!oauth_token || !oauth_verifier || !this.oAuthTokenSecret || this.oAuthToken !== oauth_token) {
+      return this.$router.push('/')
+    }
     await this.requestAccessToken({
       oAuthToken: oauth_token,
       oAuthTokenSecret: this.oAuthTokenSecret,

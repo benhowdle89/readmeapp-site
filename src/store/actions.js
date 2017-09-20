@@ -33,6 +33,12 @@ export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSec
     commit(types.SET_USER, {
       user
     })
+    commit(types.SET_OAUTH_TOKEN, {
+      oAuthToken: null
+    })
+    commit(types.SET_OAUTH_TOKEN_SECRET, {
+      oAuthTokenSecret: null
+    })
     r()
   })
 }
@@ -46,4 +52,8 @@ export const fetchTweets = async ({ commit, state }) => {
   commit(types.SET_LAST_FETCHED, {
     lastFetched: new Date()
   })
+}
+
+export const logout = ({ commit, state }) => {
+  
 }
