@@ -12,12 +12,22 @@ export default {
   methods: {
     ...mapActions(['fetchTweets'])
   },
+  data () {
+    return {
+      now: Date.now(),
+      timer: null
+    }
+  },
   computed: {
     ...mapState(['tweets', 'lastFetched']),
-    canFetchTweets () { return !haveFetchedInWindow(this.lastFetched) }
+    canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) }
   },
   mounted () {
     !this.tweets.length && this.fetchTweets()
+    this.timer = setInterval(() => { this.now = Date.now() }, 1000)
+  },
+  destroyed () {
+    clearInterval(this.timer)
   },
   components: { Tweet }
 }
