@@ -1,6 +1,6 @@
 <template lang="pug">
   .tweet
-    pre(v-html="$options.filters.linkify(strippedTweet)")
+    pre(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
     .images(v-if="media")
       img(v-for="m in media", :src="imageUrl(m)")
     p @{{ tweet.user.screen_name }}
@@ -13,7 +13,12 @@ export default {
     tweet: Object
   },
   filters: {
-    linkify: (html = '') => linkifyHtml(html, { defaultProtocol: 'https' })
+    linkify: (html = '') => linkifyHtml(html, { defaultProtocol: 'https' }),
+    tweetify: (html = '') => {
+      let tweet = html
+      tweet = tweet.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://www.twitter.com/$2" target="_blank">$2</a>');
+      return tweet.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://twitter.com/search?q=%23$2" target="_blank">$2</a>')
+    }
   },
   methods: {
     imageUrl ({ media_url }) { return `${media_url}:small` }
