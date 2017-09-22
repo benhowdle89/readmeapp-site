@@ -25,5 +25,15 @@ export default new Vuex.Store({
   getters,
   state,
   mutations,
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    paths: [
+      'user',
+      'oAuthToken',
+      'oAuthTokenSecret',
+      'oAuthAccessToken',
+      'oAuthAccessTokenSecret',
+      'tweets',
+      'lastFetched'
+    ]
+  })]
 })
