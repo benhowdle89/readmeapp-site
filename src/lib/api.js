@@ -7,21 +7,27 @@ const instance = axios.create({
 
 export default {
   async requestToken () {
-    const { data, errors } = await instance.get('?type=oauth_request')
-    return data
+    const { data: { data }, errors } = await instance.get('?type=oauth_request')
+    return {
+      data, errors
+    }
   },
   async requestAccessToken (token, tokenSecret, verifier) {
-    const { data, errors } = await instance.post('?type=auth_token', {
+    const { data: { data }, errors } = await instance.post('?type=auth_token', {
       token, tokenSecret, verifier
     })
-    return data
+    return {
+      data, errors
+    }
   },
   async fetchTweets (accessToken, accessTokenSecret, userId) {
-    const { data, errors } = await instance.post('?type=tweets', {
+    const { data: { data }, errors } = await instance.post('?type=tweets', {
       accessToken,
       accessTokenSecret,
       userId
     })
-    return data
+    return {
+      data, errors
+    }
   }
 }

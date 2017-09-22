@@ -18,7 +18,7 @@ export const requestToken = async ({ commit }) => {
 }
 
 export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSecret, oAuthVerifier} ) => {
-  return new Promise(async r => {
+  try {
     const { data : {
       oAuthAccessToken,
       oAuthAccessTokenSecret,
@@ -39,8 +39,9 @@ export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSec
     commit(types.SET_OAUTH_TOKEN_SECRET, {
       oAuthTokenSecret: null
     })
-    r()
-  })
+  } catch (error) {
+    throw error
+  }
 }
 
 export const fetchTweets = async ({ commit, state }) => {
@@ -48,29 +49,36 @@ export const fetchTweets = async ({ commit, state }) => {
     commit(types.TWEETS_LOADING, {
       loading: true
     })
-    const { oAuthAccessToken, oAuthAccessTokenSecret, user: { id } } = state
-    const { data } = await api.fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, id)
+  
+    const { oAuthAccessToken, oAuthAccessTokenSecret, user: { id }, tweets } = state
+
+    const latestTweetId = tweets.length ? tweets[0].id : null
+
+    const { data, errors } = await api.fetchTweets(
+      oAuthAccessToken, oAuthAccessTokenSecret, id, latestTweetId
+    )
+  
+    if (errors && Object.keys(errors).length) {
+      throw errors
+    }
+  
+    commit(types.TWEETS_LOADING, {
+      loading: false
+    })
     commit(types.SET_TWEETS, {
       tweets: data
     })
     commit(types.SET_LAST_FETCHED, {
       lastFetched: new Date()
     })
+  } catch (error) {
     commit(types.TWEETS_LOADING, {
       loading: false
-    }) 
-  } catch (error) {
-    const message = error.response ? error.response.data.errors : 'API Error'
-    commit(types.FETCH_TWEET_ERROR, {
-      fetchTweetError: message
     })
+    throw error
   }
 }
 
 export const logout = ({ commit, state }) => {
   
-}
-
-export const clearFetchTweetError = ({ commit }) => {
-  commit(types.CLEAR_FETCH_TWEET_ERROR)
 }

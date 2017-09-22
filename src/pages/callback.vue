@@ -20,7 +20,7 @@ export default {
       oAuthToken: oauth_token,
       oAuthTokenSecret: this.oAuthTokenSecret,
       oAuthVerifier: oauth_verifier
-    })
+    }).catch(error => this.$message.error('Error fetching token'))
     this.$router.push('/')
   }
 }

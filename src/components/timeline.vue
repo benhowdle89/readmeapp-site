@@ -1,7 +1,7 @@
 <template lang="pug">
   .timeline(v-loading="tweetsLoading")
     user
-    button(v-if="canFetchTweets", @click="fetchTweets") Fetch tweets
+    button(v-if="canFetchTweets", @click="handleFetchTweets") Fetch tweets
     tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
 
@@ -12,14 +12,9 @@ import User from './user'
 import Tweet from './tweet'
 export default {
   methods: {
-    ...mapActions(['fetchTweets', 'clearFetchTweetError']),
-    showError (message, type) {
-      this.$message({
-        showClose: true,
-        message,
-        type: 'error',
-        onClose: () => { this.clearFetchTweetError() }
-      })
+    ...mapActions(['fetchTweets']),
+    async handleFetchTweets () {
+      await this.fetchTweets().catch(error => this.$message.error('Error fetching tweets'))
     }
   },
   data () {
@@ -29,20 +24,12 @@ export default {
     }
   },
   computed: {
-    ...mapState(['tweets', 'lastFetched', 'fetchTweetError', 'tweetsLoading']),
+    ...mapState(['tweets', 'lastFetched', 'tweetsLoading']),
     canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) }
   },
   mounted () {
-    !this.tweets.length && this.fetchTweets()
+    !this.tweets.length && this.handleFetchTweets()
     this.timer = setInterval(() => { this.now = Date.now() }, 1000)
-    if (this.fetchTweetError) {
-      this.showError(this.fetchTweetError)
-    }
-  },
-  watch: {
-    fetchTweetError: function (error) {
-      error && this.showError(this.fetchTweetError)
-    }
   },
   destroyed () {
     clearInterval(this.timer)

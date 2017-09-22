@@ -27,17 +27,5 @@ export default {
   },
   [types.SET_LAST_FETCHED] (state, { lastFetched }) {
     state.lastFetched = lastFetched
-  },
-  [types.FETCH_TWEET_ERROR] (state, { fetchTweetError }) {
-    state.fetchTweetError = fetchTweetError
-  },
-  [types.CLEAR_FETCH_TWEET_ERROR] (state) {
-    state.fetchTweetError = null
-  },
-  [types.REQUEST_TOKEN_ERROR] (state, { requestTokenError }) {
-    state.requestTokenError = requestTokenError
-  },
-  [types.REQUEST_ACCESS_TOKEN_ERROR] (state, { requestAccessTokenError }) {
-    state.requestAccessTokenError = requestAccessTokenError
   }
 }
