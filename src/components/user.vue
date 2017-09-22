@@ -1,7 +1,7 @@
 <template lang="pug">
   .user
-    h2 {{ user.name }}
-    button(@click="logout") Logout
+    h2.mb2 {{ user.name }}
+    el-button(@click="logout") Logout
 </template>
 
 <script>
