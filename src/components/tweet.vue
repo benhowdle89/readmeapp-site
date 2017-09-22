@@ -1,8 +1,9 @@
 <template lang="pug">
-  .tweet.mb2.py3
-    .text.p2(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
-    .images(v-if="media")
-      img(v-for="m in media", :src="imageUrl(m)")
+  .tweet.py3
+    .content
+      .text.py2(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
+      .images.p2.mt2(v-if="media")
+        img.max-width-1(v-for="m in media", :src="imageUrl(m)")
     p: a(:href="'http://twitter.com/' + tweet.user.screen_name") {{ tweet.user.name }}
 </template>
 
@@ -47,8 +48,9 @@ export default {
 <style lang="sass">
 .tweet
   border-bottom: 1px solid #eaeaea
+.content
+  
 .text
-  border-left: 5px solid #000
   color: #888
   font: inherit
   a
