@@ -1,6 +1,6 @@
 <template lang="pug">
   .max-width-4.mx-auto.p4
-    h1 Readme App
+    h1.mb3 Readme App
     router-view
 </template>
 

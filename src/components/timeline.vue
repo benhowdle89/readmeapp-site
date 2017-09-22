@@ -1,13 +1,17 @@
 <template lang="pug">
   .timeline
-    user.my2
-    el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Fetch tweets
-    tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
+    .flex.space-between
+      .controls.col-6.my2
+        el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Refresh timeline
+        p(v-else) {{ fetchAgainIn }}
+      user.my2.col-6.right-align
+    .tweets.mt3
+      tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import { haveFetchedInWindow } from './../helpers'
+import { haveFetchedInWindow, fetchAgainIn } from './../helpers'
 import User from './user'
 import Tweet from './tweet'
 export default {
@@ -25,7 +29,11 @@ export default {
   },
   computed: {
     ...mapState(['tweets', 'lastFetched', 'tweetsLoading']),
-    canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) }
+    canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) },
+    fetchAgainIn () {
+      const again = fetchAgainIn(this.lastFetched, this.now)
+      return `Refresh again in ${again} minute${again > 1 ? 's' : ''}`
+    },
   },
   mounted () {
     !this.tweets.length && this.handleFetchTweets()
@@ -37,3 +45,8 @@ export default {
   components: { Tweet, User }
 }
 </script>
+
+<style lang="sass">
+.tweets
+  border-top: 1px solid #eaeaea
+</style>

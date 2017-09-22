@@ -13,3 +13,4 @@ export const haveFetchedInWindow = (lastFetched, now) => {
   return fetchedAgo < FETCH_WINDOW
 }
 export const ago = createdAt => distanceInWords(createdAt, new Date())
+export const fetchAgainIn = (lastFetched, now) => FETCH_WINDOW - differenceInMinutes( now, lastFetched )
