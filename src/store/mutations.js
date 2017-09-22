@@ -1,3 +1,4 @@
+import uniq from 'lodash.uniq'
 import * as types from './mutation-types'
 import initialState from './initial-state'
 
@@ -25,10 +26,10 @@ export default {
     state.user = user
   },
   [types.SET_TWEETS] (state, { tweets }) {
-    state.tweets = [
+    state.tweets = uniq([
       ...tweets,
       ...state.tweets
-    ].slice(0, TWEETS_TO_STORE)
+    ].slice(0, TWEETS_TO_STORE), 'id')
   },
   [types.TWEETS_LOADING] (state, { loading }) {
     state.tweetsLoading = loading
