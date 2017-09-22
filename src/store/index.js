@@ -4,26 +4,14 @@ import createPersistedState from 'vuex-persistedstate'
 import * as actions from './actions'
 import * as getters from './getters'
 import mutations from './mutations'
+import initialState from './initial-state'
 
 Vue.use(Vuex)
-
-const state = {
-  user: null,
-  oAuthToken: null,
-  oAuthTokenSecret: null,
-  oAuthAccessToken: null,
-  oAuthAccessTokenSecret: null,
-  tweets: [],
-  tweetsLoading: false,
-  tokenRequestLoading: false,
-  accessTokenLoading: false,
-  lastFetched: null
-}
 
 export default new Vuex.Store({
   actions,
   getters,
-  state,
+  state: initialState,
   mutations,
   plugins: [createPersistedState({
     paths: [

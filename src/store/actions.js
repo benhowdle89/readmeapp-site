@@ -3,6 +3,9 @@ import api from './../lib/api'
 
 export const requestToken = async ({ commit }) => {
   try {
+    commit(types.TOKEN_REQUEST_LOADING, {
+      loading: true
+    })
     const { data: {
       oAuthToken,
       oAuthTokenSecret
@@ -13,13 +16,22 @@ export const requestToken = async ({ commit }) => {
     commit(types.SET_OAUTH_TOKEN_SECRET, {
       oAuthTokenSecret
     })
+    commit(types.TOKEN_REQUEST_LOADING, {
+      loading: false
+    })
   } catch (error) {
+    commit(types.TOKEN_REQUEST_LOADING, {
+      loading: false
+    })
     throw error
   } 
 }
 
 export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSecret, oAuthVerifier} ) => {
   try {
+    commit(types.ACCESS_TOKEN_LOADING, {
+      loading: true
+    })
     const { data : {
       oAuthAccessToken,
       oAuthAccessTokenSecret,
@@ -40,7 +52,13 @@ export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSec
     commit(types.SET_OAUTH_TOKEN_SECRET, {
       oAuthTokenSecret: null
     })
+    commit(types.ACCESS_TOKEN_LOADING, {
+      loading: false
+    })
   } catch (error) {
+    commit(types.ACCESS_TOKEN_LOADING, {
+      loading: false
+    })
     throw error
   }
 }
@@ -81,5 +99,5 @@ export const fetchTweets = async ({ commit, state }) => {
 }
 
 export const logout = ({ commit, state }) => {
-  
+  commit(types.LOGOUT)
 }

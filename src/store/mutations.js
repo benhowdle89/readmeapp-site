@@ -1,9 +1,13 @@
 import * as types from './mutation-types'
+import initialState from './initial-state'
+
 const TWEETS_TO_STORE = 100
 
 export default {
   [types.LOGOUT] (state) {
-    state.user = null
+    Object.keys(state).map(stateKey => {
+      state[stateKey] = initialState[stateKey]
+    })
   },
   [types.SET_OAUTH_TOKEN] (state, { oAuthToken }) {
     state.oAuthToken = oAuthToken
