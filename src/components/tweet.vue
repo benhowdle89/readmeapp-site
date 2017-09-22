@@ -20,12 +20,18 @@ export default {
   },
   computed: {
     media () { return this.tweet.extended_entities && this.tweet.extended_entities.media },
+    urls () { return this.tweet.entities && this.tweet.entities.urls },
     strippedTweet () {
       let text = this.tweet.text
-      if (!this.media) return text
-      this.media.forEach(m => {
+      this.media && this.media.forEach(m => {
         const [start, end] = m.indices
         text = text.slice(0, start)
+      })
+      if (!this.urls) return text
+      this.urls.forEach(urlObj => {
+        const { expanded_url, url } = urlObj
+        const re = new RegExp(url)
+        text = text.replace(re, expanded_url)
       })
       return text
     }
