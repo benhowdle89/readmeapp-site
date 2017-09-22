@@ -16,7 +16,7 @@ html
 body
   font-family: -apple-system, BlinkMacSystemFont, sans-serif
   font-size: 1rem
-  line-height: 1.8rem
+  line-height: 2rem
   background: #fff
   color: #000
 a

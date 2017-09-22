@@ -1,4 +1,5 @@
 import differenceInMinutes from 'date-fns/difference_in_minutes'
+import distanceInWords from 'date-fns/distance_in_words'
 
 const TWITTER_BASE_URL = 'https://twitter.com/'
 const FETCH_WINDOW = 5
@@ -11,3 +12,4 @@ export const haveFetchedInWindow = (lastFetched, now) => {
   )
   return fetchedAgo < FETCH_WINDOW
 }
+export const ago = createdAt => distanceInWords(createdAt, new Date())

@@ -1,7 +1,8 @@
 <template lang="pug">
   .tweet.py3
-    .content
-      .text.py2(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
+    .content.py2
+      p.text.mb1.h3(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
+      p.h5 {{ ago }}
       .images.p2.mt2(v-if="media")
         img.max-width-1.mb1.mr1(v-for="m in media", :src="imageUrl(m)")
     p: a(:href="'http://twitter.com/' + tweet.user.screen_name") {{ tweet.user.name }}
@@ -9,6 +10,7 @@
 
 <script>
 import linkifyHtml from 'linkifyjs/html'
+import { ago } from './../helpers'
 export default {
   props: {
     tweet: Object
@@ -25,6 +27,7 @@ export default {
     imageUrl ({ media_url }) { return `${media_url}:small` }
   },
   computed: {
+    ago () { return `${ ago(this.tweet.created_at) } ago` },
     media () { return this.tweet.extended_entities && this.tweet.extended_entities.media },
     urls () { return this.tweet.entities && this.tweet.entities.urls },
     strippedTweet () {
@@ -52,7 +55,6 @@ export default {
   
 .text
   color: #888
-  font: inherit
   a
     color: #000
 </style>
