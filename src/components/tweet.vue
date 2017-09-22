@@ -3,7 +3,7 @@
     pre(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
     .images(v-if="media")
       img(v-for="m in media", :src="imageUrl(m)")
-    p @{{ tweet.user.screen_name }}
+    p: a(:href="'http://twitter.com/' + tweet.user.screen_name") @{{ tweet.user.screen_name }}
 </template>
 
 <script>
@@ -16,7 +16,7 @@ export default {
     linkify: (html = '') => linkifyHtml(html, { defaultProtocol: 'https' }),
     tweetify: (html = '') => {
       let tweet = html
-      tweet = tweet.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://www.twitter.com/$2" target="_blank">$2</a>');
+      tweet = tweet.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://twitter.com/$2" target="_blank">$2</a>');
       return tweet.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://twitter.com/search?q=%23$2" target="_blank">$2</a>')
     }
   },
