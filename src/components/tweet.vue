@@ -3,7 +3,7 @@
     .content
       .text.py2(v-html="$options.filters.linkify($options.filters.tweetify(strippedTweet))")
       .images.p2.mt2(v-if="media")
-        img.max-width-1(v-for="m in media", :src="imageUrl(m)")
+        img.max-width-1.mb1.mr1(v-for="m in media", :src="imageUrl(m)")
     p: a(:href="'http://twitter.com/' + tweet.user.screen_name") {{ tweet.user.name }}
 </template>
 
