@@ -2,7 +2,7 @@ import * as types from './mutation-types'
 import api from './../lib/api'
 
 export const requestToken = async ({ commit }) => {
-  return new Promise(async r => {
+  try {
     const { data: {
       oAuthToken,
       oAuthTokenSecret
@@ -13,8 +13,9 @@ export const requestToken = async ({ commit }) => {
     commit(types.SET_OAUTH_TOKEN_SECRET, {
       oAuthTokenSecret
     })
-    r()
-  })
+  } catch (error) {
+    throw error
+  } 
 }
 
 export const requestAccessToken = async ({ commit }, { oAuthToken, oAuthTokenSecret, oAuthVerifier} ) => {

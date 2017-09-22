@@ -1,12 +1,12 @@
 <template lang="pug">
-  h1 Callback
+  h1(v-loading="accessTokenLoading") Callback
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState(['oAuthToken', 'oAuthTokenSecret'])
+    ...mapState(['oAuthToken', 'oAuthTokenSecret', 'accessTokenLoading'])
   },
   methods: {
     ...mapActions(['requestAccessToken'])

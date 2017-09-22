@@ -1,4 +1,5 @@
 import * as types from './mutation-types'
+const TWEETS_TO_STORE = 100
 
 export default {
   [types.LOGOUT] (state) {
@@ -20,10 +21,19 @@ export default {
     state.user = user
   },
   [types.SET_TWEETS] (state, { tweets }) {
-    state.tweets = tweets
+    state.tweets = [
+      ...tweets,
+      ...state.tweets
+    ].slice(0, TWEETS_TO_STORE)
   },
   [types.TWEETS_LOADING] (state, { loading }) {
     state.tweetsLoading = loading
+  },
+  [types.TOKEN_REQUEST_LOADING] (state, { loading }) {
+    state.tokenRequestLoading = loading
+  },
+  [types.ACCESS_TOKEN_LOADING] (state, { loading }) {
+    state.accessTokenLoading = loading
   },
   [types.SET_LAST_FETCHED] (state, { lastFetched }) {
     state.lastFetched = lastFetched

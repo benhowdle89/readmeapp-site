@@ -15,6 +15,8 @@ const state = {
   oAuthAccessTokenSecret: null,
   tweets: [],
   tweetsLoading: false,
+  tokenRequestLoading: false,
+  accessTokenLoading: false,
   lastFetched: null
 }
 
