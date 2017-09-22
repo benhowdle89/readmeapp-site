@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "@atlaskit/css-reset": "^1.1.5",
     "axios": "^0.16.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
@@ -30,7 +31,7 @@
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
-    "node-sass": "^4.5.0",
+    "node-sass": "^4.5.3",
     "pug": "^2.0.0-rc.4",
     "sass-loader": "^5.0.1",
     "vue-loader": "^12.1.0",

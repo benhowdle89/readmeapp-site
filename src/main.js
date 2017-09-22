@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import '@atlaskit/css-reset'
 import 'element-ui/lib/theme-default/index.css'
 import 'basscss/css/basscss.css'
 import App from './App.vue'
