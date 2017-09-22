@@ -1,7 +1,7 @@
 <template lang="pug">
-  .timeline(v-loading="tweetsLoading")
+  .timeline
     user.my2
-    el-button(type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Fetch tweets
+    el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Fetch tweets
     tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
 

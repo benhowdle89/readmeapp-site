@@ -1,6 +1,6 @@
 <template lang="pug">
-  .login.my2(v-loading="tokenRequestLoading")
-    el-button(type="primary", @click="handleSignIn") Sign in with Twitter
+  .login.my2
+    el-button(:loading="tokenRequestLoading", type="primary", @click="handleSignIn") Sign in with Twitter
 </template>
 
 <script>

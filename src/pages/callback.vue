@@ -1,5 +1,5 @@
 <template lang="pug">
-  h1(v-loading="accessTokenLoading") Callback
+  h1 Authenticating...
 </template>
 
 <script>
