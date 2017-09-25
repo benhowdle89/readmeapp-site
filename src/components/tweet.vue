@@ -3,10 +3,13 @@
     .content.py2
       p.text.mb1.h3(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
       p.h5 {{ ago }}
+      p {{ index }}
       .images.p2.mt2(v-if="media")
-        img.max-width-1.mb1.mr1(v-for="m in media", :src="imageUrl(m)")
+        img.max-width-1.mb1.mr1(v-for="m in images", :src="imageUrl(m)")
       .videos.p2.mt2(v-if="videoIds && videoIds.length")
         youtube(:video-id="videoId", v-for="videoId in videoIds", :key="videoId")
+      .videos.p2.mt2(v-if="videos")
+        v-video(:video="videos")
     p {{ tweet.user.name }}
 </template>
 
@@ -14,9 +17,11 @@
 import linkifyHtml from 'linkifyjs/html'
 import { getIdFromURL } from 'vue-youtube-embed'
 import { ago } from './../helpers'
+import VVideo from './video'
 export default {
   props: {
-    tweet: Object
+    tweet: Object,
+    index: Number
   },
   filters: {
     linkify: (html = '') => linkifyHtml(html, { defaultProtocol: 'https' }),
@@ -34,8 +39,21 @@ export default {
     videoIds () { return this.urls && this.urls.map(({ expanded_url }) => {
       return /youtube/i.test(expanded_url) && getIdFromURL(expanded_url)
     }).filter(Boolean)},
+    videos () {
+      if (!this.media) return false
+      const videos = this.media.find(m => m.video_info)
+      if (!videos) return false
+      const { video_info: { variants }, media_url_https } = videos
+      const { url, content_type } = variants.find(v => v.url)
+      return {
+        image: media_url_https,
+        source: url,
+        type: content_type
+      }
+    },
     ago () { return `${ ago(this.tweet.created_at) } ago` },
     media () { return this.tweet.extended_entities && this.tweet.extended_entities.media },
+    images () { return this.media && this.tweet.extended_entities.media.filter(m => m.type !== 'animated_gif') },
     urls () { return this.tweet.entities && this.tweet.entities.urls },
     strippedTweet () {
       let text = this.tweet.text
@@ -51,7 +69,8 @@ export default {
       })
       return text
     }
-  }
+  },
+  components: { VVideo }
 }
 </script>
 
