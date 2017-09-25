@@ -3,7 +3,6 @@
     .content.py2
       p.text.mb1.h3(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
       p.h5 {{ ago }}
-      p {{ index }}
       .images.p2.mt2(v-if="media")
         img.max-width-1.mb1.mr1(v-for="m in images", :src="imageUrl(m)")
       .videos.p2.mt2(v-if="videoIds && videoIds.length")
@@ -20,8 +19,7 @@ import { ago } from './../helpers'
 import VVideo from './video'
 export default {
   props: {
-    tweet: Object,
-    index: Number
+    tweet: Object
   },
   filters: {
     linkify: (html = '') => linkifyHtml(html, { defaultProtocol: 'https' }),

@@ -6,7 +6,7 @@
         p(v-else) {{ fetchAgainIn }}
       user.my2.col-6.right-align
     .tweets.mt3
-      tweet(v-for="(tweet, index) in tweets", :tweet="tweet", :key="tweet.id", :index="index")
+      tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
 
 <script>
