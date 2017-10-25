@@ -1,9 +1,9 @@
 <template lang="pug">
-  .tweet.py3.flex
-    .meta.mr3
+  .tweet.pt3.flex
+    .meta.pb3
       img.profile.self-center(:src="profileImage")
       p.ago.right-align.h6 {{ ago }}
-    .content
+    .content.pl3.pb3
       p.person.mb1
         span.name {{ tweet.user.name }}
         span.mx2 •
@@ -80,9 +80,12 @@ export default {
 
 <style lang="sass">
 .tweet
-  border-bottom: 1px solid #eaeaea
+
+.meta
+  border-bottom: 1px solid #7994E5
+
 .content
-  
+  border-bottom: 1px solid #eaeaea
 .person
   font-family: 'Rubik', sans-serif
   .name
