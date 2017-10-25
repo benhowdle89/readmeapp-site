@@ -1,5 +1,5 @@
 import differenceInMinutes from 'date-fns/difference_in_minutes'
-import distanceInWords from 'date-fns/distance_in_words'
+import distanceInWords from 'date-fns/distance_in_words_strict'
 
 const TWITTER_BASE_URL = 'https://twitter.com/'
 const FETCH_WINDOW = 5

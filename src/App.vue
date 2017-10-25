@@ -1,7 +1,5 @@
 <template lang="pug">
-  .max-width-4.mx-auto.p4
-    h1.mb3 Readme App
-    router-view
+  router-view
 </template>
 
 <script>
@@ -11,12 +9,16 @@ export default {
 </script>
 
 <style lang="sass">
+*
+  border: 0
+  margin: 0
+  padding: 0
 html
-  font-size: 14px
+  font-size: 20px
 body
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif
+  font-family: 'Neuton', serif
   font-size: 1rem
-  line-height: 2rem
+  line-height: 1.6
   background: #fff
   color: #000
 a

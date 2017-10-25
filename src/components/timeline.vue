@@ -1,18 +1,15 @@
 <template lang="pug">
-  .timeline
-    .flex.space-between
-      .controls.col-6.my2
-        el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Refresh timeline
-        p(v-else) {{ fetchAgainIn }}
-      user.my2.col-6.right-align
-    .tweets.mt3
+  .timeline.max-width-2.mx-auto
+    //- .controls.col-6.my2
+    //-   el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Refresh timeline
+    //-   p(v-else) {{ fetchAgainIn }}
+    .tweets.mt1
       tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
 import { haveFetchedInWindow, fetchAgainIn } from './../helpers'
-import User from './user'
 import Tweet from './tweet'
 export default {
   methods: {
@@ -36,17 +33,16 @@ export default {
     },
   },
   mounted () {
-    !this.tweets.length && this.handleFetchTweets()
+    this.handleFetchTweets()
     this.timer = setInterval(() => { this.now = Date.now() }, 1000)
   },
   destroyed () {
     clearInterval(this.timer)
   },
-  components: { Tweet, User }
+  components: { Tweet }
 }
 </script>
 
 <style lang="sass">
-.tweets
-  border-top: 1px solid #eaeaea
+
 </style>

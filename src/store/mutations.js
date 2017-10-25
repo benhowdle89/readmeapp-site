@@ -1,4 +1,4 @@
-import uniq from 'lodash.uniq'
+import uniq from 'lodash.uniqby'
 import * as types from './mutation-types'
 import initialState from './initial-state'
 

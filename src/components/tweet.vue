@@ -1,15 +1,20 @@
 <template lang="pug">
-  .tweet.py3
-    .content.py2
-      p.text.mb1.h3(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
-      p.h5 {{ ago }}
+  .tweet.py3.flex
+    .meta.mr3
+      img.profile.self-center(:src="profileImage")
+      p.ago.right-align.h6 {{ ago }}
+    .content
+      p.person.mb1
+        span.name {{ tweet.user.name }}
+        span.mx2 •
+        span.screen-name @{{ tweet.user.screen_name }}
+      p.text.mb1(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
       .images.p2.mt2(v-if="media")
         img.max-width-1.mb1.mr1(v-for="m in images", :src="imageUrl(m)")
       .videos.p2.mt2(v-if="videoIds && videoIds.length")
         youtube(:video-id="videoId", v-for="videoId in videoIds", :key="videoId")
       .videos.p2.mt2(v-if="videos")
         v-video(:video="videos")
-    p {{ tweet.user.name }}
 </template>
 
 <script>
@@ -49,7 +54,8 @@ export default {
         type: content_type
       }
     },
-    ago () { return `${ ago(this.tweet.created_at) } ago` },
+    profileImage () { return this.tweet.user.profile_image_url_https.replace(/_normal/, '') },
+    ago () { return ago(this.tweet.created_at) },
     media () { return this.tweet.extended_entities && this.tweet.extended_entities.media },
     images () { return this.media && this.tweet.extended_entities.media.filter(m => m.type !== 'animated_gif') },
     urls () { return this.tweet.entities && this.tweet.entities.urls },
@@ -77,9 +83,23 @@ export default {
   border-bottom: 1px solid #eaeaea
 .content
   
+.person
+  font-family: 'Rubik', sans-serif
+  .name
+    font-weight: 500
+    color: #555555
+  .screen-name
+    font-weight: 300
 .text
-  color: #888
+  font-weight: 300
   a
     color: #000
+
+.ago, .screen-name
+  color: #A7A7A7
+
+.profile
+  max-width: 61px
+  border-radius: 8px
 </style>
 
