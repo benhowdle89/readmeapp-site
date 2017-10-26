@@ -2,7 +2,7 @@
   .nav-bar
     .flex.justify-between.justify-center.max-width-3.mx-auto.py2
       h1 Readme App
-      theme-switcher
+      theme-switcher(v-if="user")
       user(v-if="user")
 </template>
 

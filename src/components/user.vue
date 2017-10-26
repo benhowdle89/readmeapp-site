@@ -1,7 +1,7 @@
 <template lang="pug">
   .user.flex.items-center
     profile-picture.mr2(:user="user", size="small")
-    el-button(@click="logout") Sign Out
+    el-button.sign-out(@click="logout") Sign Out
 </template>
 
 <script>
@@ -17,3 +17,11 @@ export default {
   components: { ProfilePicture }
 }
 </script>
+
+<style lang="sass" scoped>
+.sign-out
+  border: 1px solid #7994E5
+  color: #7994E5
+  background: transparent
+</style>
+
