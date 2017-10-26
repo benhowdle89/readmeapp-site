@@ -1,7 +1,7 @@
 <template lang="pug">
   .tweet.pt2.pb3.mb3.flex
     .meta.pb0
-      img.profile.self-center(:src="profileImage")
+      profile-picture.self-center(:user="tweet.user", size="large")
       p.ago.right-align.h5.italic {{ ago }}
     .content.pl0.pb0
       p.person.mb0
@@ -21,6 +21,7 @@
 import linkifyHtml from 'linkifyjs/html'
 import { getIdFromURL } from 'vue-youtube-embed'
 import { ago } from './../helpers'
+import ProfilePicture from './profile-picture'
 import VVideo from './video'
 export default {
   props: {
@@ -54,7 +55,6 @@ export default {
         type: content_type
       }
     },
-    profileImage () { return this.tweet.user.profile_image_url_https.replace(/_normal/, '') },
     ago () { return ago(this.tweet.created_at) },
     media () { return this.tweet.extended_entities && this.tweet.extended_entities.media },
     images () { return this.media && this.tweet.extended_entities.media.filter(m => m.type !== 'animated_gif') },
@@ -74,7 +74,7 @@ export default {
       return text
     }
   },
-  components: { VVideo }
+  components: { VVideo, ProfilePicture }
 }
 </script>
 
@@ -118,9 +118,5 @@ export default {
 
 .ago, .screen-name
   color: #A7A7A7
-
-.profile
-  max-width: 61px
-  border-radius: 8px
 </style>
 

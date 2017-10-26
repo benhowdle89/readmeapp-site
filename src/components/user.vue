@@ -1,25 +1,19 @@
 <template lang="pug">
   .user.flex.items-center
-    img.profile.mr3(:src="profileImage")
+    profile-picture.mr3(:user="user", size="small")
     el-button(@click="logout") Sign Out
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import ProfilePicture from './profile-picture'
 export default {
   computed: {
-    ...mapState(['user']),
-    profileImage () { return this.user.profile_image.replace(/_normal/, '') }
+    ...mapState(['user'])
   },
   methods: {
     ...mapActions(['logout'])
-  }
+  },
+  components: { ProfilePicture }
 }
 </script>
-
-<style lang="sass" scoped>
-.profile
-  max-width: 42px
-  border-radius: 8px
-</style>
-
