@@ -1,10 +1,10 @@
 <template lang="pug">
-  .tweet.pt3.flex
-    .meta.pb3
+  .tweet.pt2.pb3.mb3.flex
+    .meta.pb0
       img.profile.self-center(:src="profileImage")
-      p.ago.right-align.h6 {{ ago }}
-    .content.pl3.pb3
-      p.person.mb1
+      p.ago.right-align.h5.italic {{ ago }}
+    .content.pl0.pb0
+      p.person.mb0
         span.name {{ tweet.user.name }}
         span.mx2 •
         span.screen-name @{{ tweet.user.screen_name }}
@@ -80,12 +80,25 @@ export default {
 
 <style lang="sass">
 .tweet
+  width: 100%
+  position: relative
+  padding-left: calc(60px + 2em)
+  border-bottom: 1px solid #eaeaea
+  min-height: 100px
 
+.tweet
 .meta
   border-bottom: 1px solid #7994E5
-
+  position: absolute
+  left: 0
+  width: 60px
+  bottom: -1px
+  left: 0
+  height: 100%
+  .profile
+    margin-top: 1em
 .content
-  border-bottom: 1px solid #eaeaea
+  width: 100%
 .person
   font-family: 'Rubik', sans-serif
   .name
@@ -95,8 +108,13 @@ export default {
     font-weight: 300
 .text
   font-weight: 300
+  font-size: 22px
+  overflow: hidden
+  text-overflow: ellipsis
   a
-    color: #000
+    color: #7994E5
+    text-decoration: none
+    white-space: nowrap
 
 .ago, .screen-name
   color: #A7A7A7

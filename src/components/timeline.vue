@@ -1,5 +1,5 @@
 <template lang="pug">
-  .timeline.max-width-2.mx-auto
+  .timeline.wrapper.mx-auto
     //- .controls.col-6.my2
     //-   el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Refresh timeline
     //-   p(v-else) {{ fetchAgainIn }}
