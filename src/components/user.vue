@@ -1,6 +1,6 @@
 <template lang="pug">
   .user.flex.items-center
-    profile-picture.mr3(:user="user", size="small")
+    profile-picture.mr2(:user="user", size="small")
     el-button(@click="logout") Sign Out
 </template>
 
