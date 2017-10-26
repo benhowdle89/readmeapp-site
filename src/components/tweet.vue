@@ -9,8 +9,8 @@
         span.mx2 •
         span.screen-name @{{ tweet.user.screen_name }}
       p.text.mb1(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
-      .images.p2.mt2(v-if="media")
-        img.max-width-1.mb1.mr1(v-for="m in images", :src="imageUrl(m)")
+      .images.mt2(v-if="media")
+        img.image(v-for="m in images", :src="imageUrl(m)")
       .videos.p2.mt2(v-if="videoIds && videoIds.length")
         youtube(:video-id="videoId", v-for="videoId in videoIds", :key="videoId")
       .videos.p2.mt2(v-if="videos")
@@ -31,8 +31,8 @@ export default {
     linkify: (html = '') => linkifyHtml(html, { defaultProtocol: 'https' }),
     tweetify: (html = '') => {
       let tweet = html
-      tweet = tweet.replace(/(^|\s)@(\w+)/g, '$1@<a href="http://twitter.com/$2" target="_blank">$2</a>');
-      return tweet.replace(/(^|\s)#(\w+)/g, '$1#<a href="http://twitter.com/search?q=%23$2" target="_blank">$2</a>')
+      tweet = tweet.replace(/(^|\s)@(\w+)/g, '$1<a href="http://twitter.com/$2" target="_blank">@$2</a>');
+      return tweet.replace(/(^|\s)#(\w+)/g, '$1<a href="http://twitter.com/search?q=%23$2" target="_blank">#$2</a>')
     },
     nl2br: (html = '') => html.replace(/(?:\r\n|\r|\n)/g, '<br />')
   },
@@ -118,5 +118,21 @@ export default {
 
 .ago, .screen-name
   color: #A7A7A7
+.image
+  border-radius: 8px
+  border: 1px solid #979797
+</style>
+
+<style lang="sass">
+.dark
+  .text
+    color: #FFFFFF
+  .person
+    .name
+      color: rgba(255, 255, 255, 0.73)
+  .meta
+    border-bottom: 1px solid #fff
+  .tweet
+    border-bottom: 1px solid rgba(255, 255, 255, 0.24)
 </style>
 

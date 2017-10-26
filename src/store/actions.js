@@ -101,3 +101,7 @@ export const fetchTweets = async ({ commit, state }) => {
 export const logout = ({ commit, state }) => {
   commit(types.LOGOUT)
 }
+
+export const switchTheme = ({ commit, state }) => {
+  commit(types.SWITCH_THEME)
+}

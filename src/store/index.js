@@ -21,7 +21,8 @@ export default new Vuex.Store({
       'oAuthAccessToken',
       'oAuthAccessTokenSecret',
       'tweets',
-      'lastFetched'
+      'lastFetched',
+      'theme'
     ]
   })]
 })

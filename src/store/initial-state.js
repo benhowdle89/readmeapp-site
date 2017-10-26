@@ -8,5 +8,6 @@ export default {
   tweetsLoading: false,
   tokenRequestLoading: false,
   accessTokenLoading: false,
-  lastFetched: null
+  lastFetched: null,
+  theme: 'light'
 }

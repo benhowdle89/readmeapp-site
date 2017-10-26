@@ -3,8 +3,26 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'app'
+  name: 'app',
+  computed: {
+    ...mapState(['theme'])
+  },
+  methods: {
+    changeThemeClass () {
+      return document.body.classList.toggle('dark')
+    }
+  },
+  mounted () {
+    const isDark = document.body.classList.contains('dark')
+    if (this.theme === 'dark' && !isDark) return this.changeThemeClass()
+  },
+  watch: {
+    'theme' () {
+      this.changeThemeClass()
+    }
+  }
 }
 </script>
 
@@ -22,6 +40,8 @@ body
   background: #fff
   color: #000
   -webkit-font-smoothing: antialiased
+  &.dark
+    background: #313036
 a
   color: inherit
   text-decoration: underline

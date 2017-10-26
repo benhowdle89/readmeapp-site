@@ -10,6 +10,9 @@ export default {
       state[stateKey] = initialState[stateKey]
     })
   },
+  [types.SWITCH_THEME] (state) {
+    state.theme = state.theme == 'light' ? 'dark' : 'light'
+  },
   [types.SET_OAUTH_TOKEN] (state, { oAuthToken }) {
     state.oAuthToken = oAuthToken
   },
