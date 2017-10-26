@@ -6,7 +6,7 @@
     .content.pl0.pb0
       p.person.mb0
         span.name {{ tweet.user.name }}
-        span.mx2 •
+        span.mx2.dot •
         span.screen-name @{{ tweet.user.screen_name }}
       p.text.mb1(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
       .images.mt2(v-if="media")
@@ -130,6 +130,8 @@ export default {
   .person
     .name
       color: rgba(255, 255, 255, 0.73)
+    .screen-name, .dot
+      color: rgba(255, 255, 255, 0.44)
   .meta
     border-bottom: 1px solid #fff
   .tweet
