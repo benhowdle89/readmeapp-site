@@ -31,6 +31,7 @@ export default {
   border: 0
   margin: 0
   padding: 0
+  transition: background .4s ease
 html
   font-size: 19px
 body

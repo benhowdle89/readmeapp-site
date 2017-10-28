@@ -35,10 +35,10 @@ export default {
   .switch-indicator
     position: absolute
     left: 0
-    top: -4px
+    top: -3px
     transform: translateX(17px)
-    width: 20px
-    height: 20px
+    width: 18px
+    height: 18px
     border-radius: 99em
     background-color: black
     transition: all .5s ease
