@@ -21,10 +21,15 @@ export default {
 <style lang="sass" scoped>
 .nav-bar
   border-bottom: 1px solid rgba(121, 148, 229, 0.23)
+  position: fixed
+  width: 100%
+  top: 0
+  z-index: 99
+  background: white
 </style>
 
 <style lang="sass">
 .dark
   .nav-bar
-    background: rgba(0,0,0,0.17)
+    background: #28272C
 </style>

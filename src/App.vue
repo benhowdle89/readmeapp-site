@@ -48,4 +48,5 @@ a
   text-decoration: underline
 .wrapper
   max-width: 690px
+  padding-top: calc(4em + 34px)
 </style>
