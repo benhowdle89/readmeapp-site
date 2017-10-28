@@ -22,6 +22,7 @@ export default {
 <style lang="sass">
   .switcher
     margin-top: .5em
+    cursor: pointer
 
   .switcher
   .switch-bar
