@@ -1,5 +1,7 @@
 <template lang="pug">
-  el-button(@click="switchTheme") {{ buttonText }}
+  .switcher(@click="switchTheme")
+    .switch-bar
+      .switch-indicator
 </template>
 
 <script>
@@ -16,3 +18,38 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+  .switcher
+    margin-top: .5em
+
+  .switcher
+  .switch-bar
+    width: 30px
+    height: 11px;
+    border-radius: 99em
+    background: #EDEDED
+    border: 1px solid #C8C8C8
+    position: relative
+  
+  .switch-indicator
+    position: absolute
+    left: 0
+    top: -4px
+    transform: translateX(17px)
+    width: 20px
+    height: 20px
+    border-radius: 99em
+    background-color: black
+    transition: all .5s ease
+
+  .dark
+    .switcher
+    .switch-bar
+      background: black
+      border-color: black
+
+    .switch-indicator
+      background-color: white
+      transform: translateX(-7px)
+</style>
