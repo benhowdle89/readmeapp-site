@@ -49,7 +49,7 @@ a
   color: inherit
   text-decoration: underline
 .wrapper
-  max-width: 690px
+  max-width: 730px
   padding-top: calc(4em + 34px)
   padding-left: 20px
   padding-right: 20px

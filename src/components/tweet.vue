@@ -6,7 +6,7 @@
     .content.pl0.pb0
       p.person.mb0
         span.name {{ tweet.user.name }}
-        span.mx2.dot •
+        span.mx1.dot •
         span.screen-name @{{ tweet.user.screen_name }}
       p.text.mb1(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
       .images.mt2(v-if="media")
