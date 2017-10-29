@@ -32,6 +32,7 @@ export default {
   margin: 0
   padding: 0
   transition: background .4s ease
+  box-sizing: border-box
 html
   font-size: 19px
 body
@@ -49,4 +50,6 @@ a
 .wrapper
   max-width: 690px
   padding-top: calc(4em + 34px)
+  padding-left: 20px
+  padding-right: 20px
 </style>

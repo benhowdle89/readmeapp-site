@@ -11,7 +11,7 @@
       p.text.mb1(v-html="$options.filters.linkify($options.filters.tweetify($options.filters.nl2br(strippedTweet)))")
       .images.mt2(v-if="media")
         img.image(v-for="m in images", :src="imageUrl(m)")
-      .videos.p2.mt2(v-if="videoIds && videoIds.length")
+      .videos.youtube.p2.mt2(v-if="videoIds && videoIds.length")
         youtube(:video-id="videoId", v-for="videoId in videoIds", :key="videoId")
       .videos.p2.mt2(v-if="videos")
         v-video(:video="videos")
@@ -120,7 +120,22 @@ export default {
   color: #A7A7A7
 .image
   border-radius: 8px
-  border: 1px solid #979797
+  max-width: 100%
+
+.youtube
+  position: relative
+  padding-bottom: 56.25%
+  height: 0
+  overflow: hidden
+  max-width: 100%;
+
+.youtube iframe, .youtube object, .youtube embed
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  
 </style>
 
 <style lang="sass">

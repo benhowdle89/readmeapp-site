@@ -22,6 +22,6 @@ export default {
   &.large
     max-width: 61px
   &.small
-    max-width: 42px
+    max-width: 32px
   border-radius: 8px
 </style>

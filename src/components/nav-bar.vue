@@ -33,12 +33,10 @@ export default {
   z-index: 99
   background: white
 
-.logo
-  width: 190px
-
 .logo svg
-  height: 15px
-  margin-top: .75em
+  height: 14px
+  width: 72px
+  margin-top: .55em
 </style>
 
 <style lang="sass">
