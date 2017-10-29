@@ -32,7 +32,8 @@ export default {
   top: 0
   z-index: 99
   background: white
-
+  padding-left: 20px
+  padding-right: 20px
 .logo svg
   height: 14px
   width: 72px

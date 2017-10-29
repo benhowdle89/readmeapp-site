@@ -34,7 +34,7 @@ export default {
   transition: background .4s ease
   box-sizing: border-box
 html
-  font-size: 19px
+  font-size: 12px
 body
   font-family: 'Neuton', serif
   font-size: 1rem
@@ -44,6 +44,7 @@ body
   -webkit-font-smoothing: antialiased
   &.dark
     background: #313036
+
 a
   color: inherit
   text-decoration: underline
@@ -52,4 +53,9 @@ a
   padding-top: calc(4em + 34px)
   padding-left: 20px
   padding-right: 20px
+
+@media(min-width: 720px)
+  html
+    font-size: 19px
+
 </style>

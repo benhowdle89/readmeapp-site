@@ -82,21 +82,30 @@ export default {
 .tweet
   width: 100%
   position: relative
-  padding-left: calc(60px + 2em)
+  padding-left: calc(40px + 1em)
   border-bottom: 1px solid #eaeaea
   min-height: 100px
+
+@media(min-width: 720px)
+  .tweet
+    padding-left: calc(60px + 2em)
 
 .tweet
 .meta
   border-bottom: 1px solid #7994E5
   position: absolute
   left: 0
-  width: 60px
+  width: 40px
   bottom: -1px
   left: 0
   height: 100%
   .profile
     margin-top: 1em
+@media(min-width: 720px)
+  .meta
+    width: 60px
+.meta img
+  width: 100%
 .content
   width: 100%
 .person
@@ -108,7 +117,7 @@ export default {
     font-weight: 300
 .text
   font-weight: 300
-  font-size: 22px
+  font-size: 1.1rem
   overflow: hidden
   text-overflow: ellipsis
   a
