@@ -1,7 +1,8 @@
 <template lang="pug">
   .nav-bar
     .flex.justify-between.justify-center.max-width-3.mx-auto.py2
-      .logo Readme App
+      .logo
+        icon(glyph="#logo")
       theme-switcher(v-if="user")
       user(v-if="user")
 </template>
@@ -10,11 +11,16 @@
 import { mapState } from 'vuex'
 import User from './user'
 import ThemeSwitcher from './theme-switcher'
+import icon from './icon'
+import Logo from '../img/logo.svg'
 export default {
   computed: {
     ...mapState(['user'])
   },
-  components: { User, ThemeSwitcher }
+  components: { User, ThemeSwitcher, icon },
+  data() {
+    return { Logo }
+  }
 }
 </script>
 
@@ -26,6 +32,13 @@ export default {
   top: 0
   z-index: 99
   background: white
+
+.logo
+  width: 190px
+
+.logo svg
+  height: 15px
+  margin-top: .75em
 </style>
 
 <style lang="sass">

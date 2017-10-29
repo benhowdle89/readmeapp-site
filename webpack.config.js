@@ -29,7 +29,7 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
+        test: /\.(eot|ttf|woff|woff2)(\?\S*)?$/,
         loader: 'file-loader'
       },
       {
@@ -38,7 +38,13 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.svg$/,
+        use: [
+          { loader: 'svg-sprite-loader', options: { name: '[name]_[hash]', prefixize: true } }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]'
