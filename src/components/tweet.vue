@@ -124,12 +124,13 @@ export default {
     color: #7994E5
     text-decoration: none
     white-space: nowrap
-
+.ago
+  font-weight: 400
 .ago, .screen-name
   color: #A7A7A7
 .image
   border-radius: 8px
-  max-width: 100%
+  width: 100%
 
 .youtube
   position: relative
