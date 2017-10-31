@@ -1,6 +1,6 @@
 <template lang="pug">
   .index
-    nav-bar
+    nav-bar(v-if="user")
     timeline(v-if="user")
     login(v-else)
 </template>

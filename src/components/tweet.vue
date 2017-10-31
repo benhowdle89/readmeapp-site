@@ -15,7 +15,7 @@
         youtube(:video-id="videoId", v-for="videoId in videoIds", :key="videoId")
       .videos.p2.mt2(v-if="videos")
         v-video(:video="videos")
-      a.externalLink(:href="externalLink.link" target="_blank" v-if="showExternal")
+      a.externalLink(:href="externalLink.link" target="_blank" v-if="showExternal" )
         .extImg(v-if="externalLink.image")
           img(:src="externalLink.image")
         div.extContent
@@ -101,29 +101,31 @@ export default {
       await fetch(queryUrl)
         .then(data => {
           data.json().then( meta => {
-              let metaString = `<html><head>${meta.query.results.result}</head><body></body>`
-              let parser = new DOMParser()
-              let htmlDoc = parser.parseFromString(metaString, "text/xml")
-              let metas = htmlDoc.getElementsByTagName('meta')
-              this.externalLink.site = this.urls[0].expanded_url
-              this.externalLink.link = this.urls[0].expanded_url
-              for(let metaTag of metas) {
-                if(metaTag.getAttribute("property") == "og:image") {
-                  this.externalLink.image = metaTag.getAttribute("content")
+              if(meta.query.results) {
+                let metaString = `<html><head>${meta.query.results.result}</head><body></body>`
+                let parser = new DOMParser()
+                let htmlDoc = parser.parseFromString(metaString, "text/xml")
+                let metas = htmlDoc.getElementsByTagName('meta')
+                this.externalLink.site = this.urls[0].expanded_url
+                this.externalLink.link = this.urls[0].expanded_url
+                for(let metaTag of metas) {
+                  if(metaTag.getAttribute("property") == "og:image") {
+                    this.externalLink.image = metaTag.getAttribute("content")
+                  }
+                  if(metaTag.getAttribute("property") == "og:title") {
+                    this.externalLink.title = metaTag.getAttribute("content").substring(0,60) + '…'
+                  }
+                  if(metaTag.getAttribute("property") == "og:description") {
+                    this.externalLink.description = metaTag.getAttribute("content").substring(0,60) + '…'
+                  }
+                  if(metaTag.getAttribute("property") == "og:site_name") {
+                    this.externalLink.site = metaTag.getAttribute("content").toLowerCase()
+                  }
                 }
-                if(metaTag.getAttribute("property") == "og:title") {
-                  this.externalLink.title = metaTag.getAttribute("content").substring(0,60) + '…'
+                if(this.externalLink.title) {
+                  this.showExternal = true
+                  this.urls.shift()
                 }
-                if(metaTag.getAttribute("property") == "og:description") {
-                  this.externalLink.description = metaTag.getAttribute("content").substring(0,60) + '…'
-                }
-                if(metaTag.getAttribute("property") == "og:site_name") {
-                  this.externalLink.site = metaTag.getAttribute("content").toLowerCase()
-                }
-              }
-              if(this.externalLink.title) {
-                this.showExternal = true
-                this.urls.shift()
               }
           })
         })
@@ -267,5 +269,11 @@ export default {
     border-bottom: 1px solid #fff
   .tweet
     border-bottom: 1px solid rgba(255, 255, 255, 0.24)
+  .externalLink
+    background-color: rgba(129,142,245,.05)
+  .extTitle
+    color: rgba(255,255,255,.9)
+  .extDescription
+    color: rgba(255,255,255,.66)
 </style>
 
