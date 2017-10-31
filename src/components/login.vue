@@ -1,6 +1,15 @@
 <template lang="pug">
-  .login.my2
-    el-button(:loading="tokenRequestLoading", type="primary", @click="handleSignIn") Sign in with Twitter
+  .login
+    .hero
+      .inner.mxa.flex.flex-stretch
+        .copy.flex.flex-end
+          .copy-wrap.flex-auto
+            h1.tagline Tweets. Without all the other bullshit.
+            p.usp Readme is a purposefully feature-lite Twitter client designed to show you the tweets you signed up to see.
+            .sign-in
+              el-button(:loading="tokenRequestLoading", type="primary", @click="handleSignIn") Sign in with Twitter
+        .screenshot.flex-auto
+          img(src="https://image.ibb.co/iQ7BFw/Screen_Shot_2017_10_31_at_22_23_08.png")
 </template>
 
 <script>
@@ -19,3 +28,63 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.hero
+  background: #7994E5
+  width: 100vw
+  height: 100vh
+  padding: 50px
+  color: white
+  border: 22px solid #313036
+  line-height: 1.1
+
+.screenshot
+  img
+    width: 100%
+    border-radius: 6px
+  max-height: 90vh
+  overflow: hidden
+  margin-bottom: 3vh
+  width: 60% 
+
+.inner
+  max-width: 1120px
+  margin: auto
+
+h1
+  font-size: 2rem
+  font-family: "Rubik"
+  font-weight: 500
+  width: 100%;
+  margin-bottom: 1rem
+
+.usp
+  font-size: 1.2rem
+  color: #313036
+  font-family: "Rubik"
+  font-weight: 100
+  line-height: 1.3
+  width: 100%;
+  margin-bottom: 2rem
+
+.copy-wrap
+  width: calc(100% - 5vw)
+  position: absolute
+  bottom: 4vh
+
+.copy
+  width: 50%
+  padding-right: 5vw
+  position: relative
+
+.sign-in button
+  text-transform: uppercase
+  background: transparent
+  border: 1px solid white
+  padding: 1rem
+  letter-spacing: 2px
+  font-family: "Rubik"
+  font-weight: 500
+</style>
+

@@ -55,7 +55,8 @@ export default {
         site: '',
         link: '',
       },
-      showExternal: false, 
+      showExternal: false,
+      showExtImage: false, 
     }
   },
   computed: {
@@ -111,6 +112,7 @@ export default {
                 for(let metaTag of metas) {
                   if(metaTag.getAttribute("property") == "og:image") {
                     this.externalLink.image = metaTag.getAttribute("content")
+                    this.showExtImage = true
                   }
                   if(metaTag.getAttribute("property") == "og:title") {
                     this.externalLink.title = metaTag.getAttribute("content").substring(0,60) + '…'
