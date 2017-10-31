@@ -4,7 +4,7 @@
       .inner.mxa.flex.flex-stretch
         .copy.flex.flex-end
           .copy-wrap.flex-auto
-            h1.tagline Tweets. Without all the other bullshit.
+            h1.tagline Tweets. Without the bullshit.
             p.usp Readme is a purposefully feature-lite Twitter client designed to show you the tweets you signed up to see.
             .sign-in
               el-button(:loading="tokenRequestLoading", type="primary", @click="handleSignIn") Sign in with Twitter
@@ -60,11 +60,11 @@ export default {
     display: block
 
 h1
-  font-size: 2em
+  font-size: 2.7em
   font-family: "Rubik"
   font-weight: 500
   width: 100%;
-  margin-bottom: 1em
+  margin-bottom: 1rem
 
 .usp
   font-size: 1.2em
