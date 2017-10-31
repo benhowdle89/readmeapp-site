@@ -123,8 +123,8 @@ export default {
               }
               if(this.externalLink.title) {
                 this.showExternal = true
+                this.urls.shift()
               }
-              this.urls.shift()
           })
         })
     } 
