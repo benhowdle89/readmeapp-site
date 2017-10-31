@@ -98,7 +98,7 @@ export default {
     // const html = await fetch('https://cors-anywhere.herokuapp.com/http://www.imdb.com/title/tt1375666/')
     if(this.urls[0]) {
       const yql = `select * from htmlstring where url='${this.urls[0].expanded_url}' AND xpath='/html/head/meta'`
-      const queryUrl = `http://query.yahooapis.com/v1/public/yql?q=${encodeURIComponent(yql)}&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`
+      const queryUrl = `//query.yahooapis.com/v1/public/yql?q=${encodeURIComponent(yql)}&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys`
       await fetch(queryUrl)
         .then(data => {
           data.json().then( meta => {
