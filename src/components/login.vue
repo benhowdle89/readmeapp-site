@@ -38,45 +38,58 @@ export default {
   color: white
   border: 22px solid #313036
   line-height: 1.1
+  @media(max-width: 690px)
+    border-width: 8px
+    font-size: 19px
 
 .screenshot
+  @media(max-width: 690px)
+    display: none
   img
     width: 100%
     border-radius: 6px
   max-height: 90vh
   overflow: hidden
   margin-bottom: 3vh
-  width: 60% 
+  width: 100% 
 
 .inner
   max-width: 1120px
   margin: auto
+  @media(max-width: 690px)
+    display: block
 
 h1
-  font-size: 2rem
+  font-size: 2em
   font-family: "Rubik"
   font-weight: 500
   width: 100%;
-  margin-bottom: 1rem
+  margin-bottom: 1em
 
 .usp
-  font-size: 1.2rem
+  font-size: 1.2em
   color: #313036
   font-family: "Rubik"
   font-weight: 100
   line-height: 1.3
   width: 100%;
-  margin-bottom: 2rem
+  margin-bottom: 2em
 
 .copy-wrap
   width: calc(100% - 5vw)
   position: absolute
   bottom: 4vh
+  @media(max-width: 690px)
+    position: relative
+    padding-top: 10vh
 
 .copy
   width: 50%
   padding-right: 5vw
   position: relative
+  @media(max-width: 690px)
+    width: 100%
+    padding-right: 0
 
 .sign-in button
   text-transform: uppercase
@@ -86,5 +99,10 @@ h1
   letter-spacing: 2px
   font-family: "Rubik"
   font-weight: 500
+  @media(max-width: 690px)
+    width: 100%
+    font-size: 16px
+    padding-top: 2rem
+    padding-bottom: 2rem
 </style>
 
