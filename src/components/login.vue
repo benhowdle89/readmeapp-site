@@ -5,7 +5,7 @@
         .copy.flex.flex-end
           .copy-wrap.flex-auto
             h1.tagline Tweets. Without the bullshit.
-            p.usp Readme is a purposefully feature-lite Twitter client designed to show you the tweets you signed up to see.
+            p.usp Readme is a purposefully feature-lite Twitter reader designed to show you the tweets you signed up to see.
             .sign-in
               el-button(:loading="tokenRequestLoading", type="primary", @click="handleSignIn") Sign in with Twitter
         .screenshot.flex-auto
