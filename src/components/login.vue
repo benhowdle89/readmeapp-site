@@ -38,6 +38,7 @@ export default {
   color: white
   border: 22px solid #313036
   line-height: 1.1
+  overflow: auto
   @media(max-width: 760px)
     border-width: 8px
     font-size: 19px
@@ -48,7 +49,7 @@ export default {
   img
     width: 100%
     border-radius: 6px
-  max-height: 90vh
+  max-height: 80vh
   overflow: hidden
   margin-bottom: 3vh
   width: 60% 
