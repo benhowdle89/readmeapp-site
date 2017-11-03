@@ -39,7 +39,7 @@ export default {
     nl2br: (html = '') => html.replace(/(?:\r\n|\r|\n)/g, '<br />')
   },
   methods: {
-    imageUrl ({ media_url }) { return `${media_url}:small` }
+    imageUrl ({ media_url }) { return `${media_url.replace(/^http:\/\//i, 'https://')}:small` }
   },
   computed: {
     videoIds () { return this.urls && this.urls.map(({ expanded_url }) => {
