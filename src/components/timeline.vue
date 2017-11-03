@@ -33,7 +33,7 @@ export default {
     },
   },
   mounted () {
-    this.handleFetchTweets()
+    this.canFetchTweets && this.handleFetchTweets()
     this.timer = setInterval(() => { this.now = Date.now() }, 1000)
   },
   destroyed () {
