@@ -34,6 +34,15 @@ export default {
       ...state.tweets
     ].slice(0, TWEETS_TO_STORE), 'id')
   },
+  [types.SAVE_META] (state, { id, meta }) {
+    state.tweets = state.tweets.map(tweet => {
+      if (tweet.id !== id) return tweet
+      return {
+        ...tweet,
+        meta
+      }
+    })
+  },
   [types.TWEETS_LOADING] (state, { loading }) {
     state.tweetsLoading = loading
   },

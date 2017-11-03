@@ -98,6 +98,13 @@ export const fetchTweets = async ({ commit, state }) => {
   }
 }
 
+export const saveMeta = ({ commit, state}, { id, meta }) => {
+  commit(types.SAVE_META, {
+    id,
+    meta
+  })
+}
+
 export const logout = ({ commit, state }) => {
   commit(types.LOGOUT)
 }
