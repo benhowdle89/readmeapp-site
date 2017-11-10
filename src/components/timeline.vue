@@ -1,8 +1,5 @@
 <template lang="pug">
   .timeline.wrapper.mx-auto
-    //- .controls.col-6.my2
-    //-   el-button(:loading="tweetsLoading", type="primary", v-if="canFetchTweets", @click="handleFetchTweets") Refresh timeline
-    //-   p(v-else) {{ fetchAgainIn }}
     .tweets.mt1
       tweet(v-for="tweet in tweets", :tweet="tweet", :key="tweet.id")
 </template>
@@ -25,7 +22,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['tweets', 'lastFetched', 'tweetsLoading']),
+    ...mapState(['tweets', 'lastFetched']),
     canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) },
     fetchAgainIn () {
       const again = fetchAgainIn(this.lastFetched, this.now)

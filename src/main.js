@@ -6,7 +6,9 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import vueSmoothScroll from 'vue-smoothscroll'
 
+Vue.use(vueSmoothScroll)
 Vue.use(VueYouTubeEmbed)
 Vue.use(ElementUI)
 

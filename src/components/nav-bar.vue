@@ -1,7 +1,7 @@
 <template lang="pug">
   .nav-bar
     .flex.justify-between.justify-center.max-width-3.mx-auto.py2
-      .logo
+      .logo(v-loading="tweetsLoading", @click="scrollToTop")
         icon(glyph="#logo")
       theme-switcher(v-if="user")
       user(v-if="user")
@@ -15,11 +15,14 @@ import icon from './icon'
 import Logo from '../img/logo.svg'
 export default {
   computed: {
-    ...mapState(['user'])
+    ...mapState(['user', 'tweetsLoading'])
   },
   components: { User, ThemeSwitcher, icon },
   data() {
     return { Logo }
+  },
+  methods: {
+    scrollToTop () { this.$SmoothScroll(0,500) }
   }
 }
 </script>
@@ -34,6 +37,8 @@ export default {
   background: white
   padding-left: 20px
   padding-right: 20px
+.logo
+  cursor: pointer
 .logo svg
   height: 14px
   width: 72px
