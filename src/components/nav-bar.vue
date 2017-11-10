@@ -49,4 +49,6 @@ export default {
 .dark
   .nav-bar
     background: #28272C
+    .el-loading-mask
+      background: transparent !important
 </style>
