@@ -94,6 +94,8 @@ export default {
   position: absolute
   bottom: 1em
   font-size: .84rem
+  padding-right: 2rem
+  word-break: break-all  
 
 .extDescription
   font-style: italic
