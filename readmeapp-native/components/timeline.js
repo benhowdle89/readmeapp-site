@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, FlatList, Text } from "react-native";
+import { View, FlatList, Text, Alert } from "react-native";
 import { connect } from "react-redux";
 import { AuthSession } from "expo";
 import styled from "styled-components";
@@ -22,13 +22,13 @@ class Timeline extends Component {
     } = this.props;
     if (!tweets.length)
       fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id).catch(
-        error => console.log(error)
+        error => Alert.alert("Uh oh", "Couldn't fetch tweets")
       );
   }
   render() {
     const { tweets, user, logout, tweetsLoading } = this.props;
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, paddingBottom: 60 }}>
         <UserBar user={user} logout={logout} />
         <Centered>
           {tweetsLoading ? (
@@ -40,7 +40,7 @@ class Timeline extends Component {
                 return <Tweet tweet={tweet} />;
               }}
               style={{
-                marginVertical: 20
+                marginTop: 20
               }}
               keyExtractor={tweet => tweet.id_str}
               ItemSeparatorComponent={() => (

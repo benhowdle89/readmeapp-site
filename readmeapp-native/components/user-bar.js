@@ -8,7 +8,7 @@ const StyledBarView = styled.View`
   align-items: center;
   border-bottom-color: rgba(121, 148, 229, 0.23);
   border-bottom-width: 1;
-  padding-bottom: 20px;
+  padding: 20px 0;
 `;
 
 const StyledLinkText = styled.Text`

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Button } from "react-native";
+import { View, Button, Alert } from "react-native";
 import { connect } from "react-redux";
 import { AuthSession } from "expo";
 
@@ -18,15 +18,17 @@ class Login extends Component {
     requestToken().then(async () => {
       let res = await AuthSession.startAsync({
         authUrl: twitterOAuthURL(this.props.oAuthToken)
-      });
+      }).catch(() => Alert.alert("Uh oh", "Couldn't login with Twitter"));
+      if (!res.params)
+        return Alert.alert("Uh oh", "Couldn't login with Twitter");
       const {
         params: { oauth_token, oauth_verifier }
       } = res;
-      await requestAccessToken(
+      requestAccessToken(
         oauth_token,
         this.props.oAuthTokenSecret,
         oauth_verifier
-      );
+      ).catch(() => Alert.alert("Uh oh", "Couldn't login with Twitter"));
     });
   };
   render() {

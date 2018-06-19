@@ -57,7 +57,6 @@ export default function reducer(state = initialState, action) {
         )
       };
     case FETCH_TWEETS_FAIL:
-      console.log("her");
       return {
         ...state,
         loading: false,
