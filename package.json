@@ -13,7 +13,6 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "basscss": "8.0.2",
-    "date-fns": "^1.28.5",
     "element-ui": "^1.4.4",
     "linkifyjs": "^2.1.5",
     "lodash.uniqby": "^4.7.0",

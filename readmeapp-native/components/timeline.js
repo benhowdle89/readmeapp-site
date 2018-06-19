@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { View, FlatList, Text } from "react-native";
 import { connect } from "react-redux";
 import { AuthSession } from "expo";
+import styled from "styled-components";
 
-import { fetchTweets } from "./../lib/reducer";
+import { fetchTweets, logout } from "./../lib/reducer";
 
 import Tweet from "./../components/tweet";
 import UserBar from "./../components/user-bar";
+import Centered from "./../components/centered";
+import Loader from "./../components/loader";
 
 class Timeline extends Component {
   componentWillMount() {
@@ -14,34 +17,44 @@ class Timeline extends Component {
       user,
       oAuthAccessToken,
       oAuthAccessTokenSecret,
-      fetchTweets
+      fetchTweets,
+      tweets
     } = this.props;
-    fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id);
+    if (!tweets.length)
+      fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id).catch(
+        error => console.log(error)
+      );
   }
   render() {
-    const { tweets, user } = this.props;
+    const { tweets, user, logout, tweetsLoading } = this.props;
     return (
-      <View>
-        <UserBar user={user} />
-        <FlatList
-          data={tweets}
-          renderItem={tweet => {
-            return <Tweet tweet={tweet} />;
-          }}
-          style={{
-            marginVertical: 20
-          }}
-          keyExtractor={tweet => tweet.id_str}
-          ItemSeparatorComponent={() => (
-            <View
+      <View style={{ flex: 1 }}>
+        <UserBar user={user} logout={logout} />
+        <Centered>
+          {tweetsLoading ? (
+            <Loader />
+          ) : (
+            <FlatList
+              data={tweets}
+              renderItem={tweet => {
+                return <Tweet tweet={tweet} />;
+              }}
               style={{
-                height: 1,
-                backgroundColor: "#eaeaea",
                 marginVertical: 20
               }}
+              keyExtractor={tweet => tweet.id_str}
+              ItemSeparatorComponent={() => (
+                <View
+                  style={{
+                    height: 1,
+                    backgroundColor: "#eaeaea",
+                    marginVertical: 20
+                  }}
+                />
+              )}
             />
           )}
-        />
+        </Centered>
       </View>
     );
   }
@@ -51,18 +64,21 @@ const mapStateToProps = ({
   user,
   oAuthAccessToken,
   oAuthAccessTokenSecret,
-  tweets
+  tweets,
+  tweetsLoading
 }) => {
   return {
     user,
     oAuthAccessToken,
     oAuthAccessTokenSecret,
-    tweets
+    tweets,
+    tweetsLoading
   };
 };
 
 const mapDispatchToProps = {
-  fetchTweets
+  fetchTweets,
+  logout
 };
 
 export default connect(

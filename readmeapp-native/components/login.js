@@ -9,6 +9,9 @@ import {
   twitterOAuthURL
 } from "./../lib/reducer";
 
+import Centered from "./centered";
+import Loader from "./loader";
+
 class Login extends Component {
   _requestToken = async () => {
     const { requestToken, requestAccessToken } = this.props;
@@ -19,7 +22,6 @@ class Login extends Component {
       const {
         params: { oauth_token, oauth_verifier }
       } = res;
-      console.log(this.props);
       await requestAccessToken(
         oauth_token,
         this.props.oAuthTokenSecret,
@@ -28,19 +30,32 @@ class Login extends Component {
     });
   };
   render() {
+    const { tokenRequestLoading, accessTokenLoading } = this.props;
     return (
-      <View>
-        <Button title="Login" onPress={this._requestToken} />
-      </View>
+      <Centered>
+        {tokenRequestLoading || accessTokenLoading ? (
+          <Loader />
+        ) : (
+          <Button title="Login" onPress={this._requestToken} />
+        )}
+      </Centered>
     );
   }
 }
 
-const mapStateToProps = ({ user, oAuthToken, oAuthTokenSecret }) => {
+const mapStateToProps = ({
+  user,
+  oAuthToken,
+  oAuthTokenSecret,
+  tokenRequestLoading,
+  accessTokenLoading
+}) => {
   return {
     user,
     oAuthToken,
-    oAuthTokenSecret
+    oAuthTokenSecret,
+    tokenRequestLoading,
+    accessTokenLoading
   };
 };
 

@@ -57,6 +57,7 @@ export default function reducer(state = initialState, action) {
         )
       };
     case FETCH_TWEETS_FAIL:
+      console.log("her");
       return {
         ...state,
         loading: false,
@@ -123,6 +124,12 @@ export default function reducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export function logout() {
+  return {
+    type: LOGOUT
+  };
 }
 
 export function requestToken() {

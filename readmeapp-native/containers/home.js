@@ -5,6 +5,7 @@ import StatusBarPaddingIOS from "react-native-ios-status-bar-padding";
 
 import Login from "./../components/login";
 import Timeline from "./../components/timeline";
+import Centered from "./../components/centered";
 
 class Home extends Component {
   render() {
@@ -12,7 +13,7 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <StatusBarPaddingIOS />
-        <View>{user ? <Timeline /> : <Login />}</View>
+        <Centered>{user ? <Timeline /> : <Login />}</Centered>
       </View>
     );
   }
@@ -21,13 +22,14 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    marginHorizontal: 20
+    marginHorizontal: 20,
+    flex: 1
   }
 });
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ user }) => {
   return {
-    user: state.user
+    user
   };
 };
 
