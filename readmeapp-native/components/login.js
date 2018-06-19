@@ -38,7 +38,7 @@ class Login extends Component {
         {tokenRequestLoading || accessTokenLoading ? (
           <Loader />
         ) : (
-          <Button title="Login" onPress={this._requestToken} />
+          <Button title="Login with Twitter" onPress={this._requestToken} />
         )}
       </Centered>
     );
