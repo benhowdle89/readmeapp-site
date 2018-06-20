@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { AuthSession } from "expo";
 import styled from "styled-components";
 
-import { fetchTweets, logout } from "./../lib/reducer";
+import { fetchTweets, logout, saveMeta } from "./../lib/reducer";
 
 import Tweet from "./../components/tweet";
 import UserBar from "./../components/user-bar";
@@ -26,7 +26,7 @@ class Timeline extends Component {
       );
   }
   render() {
-    const { tweets, user, logout, tweetsLoading } = this.props;
+    const { tweets, user, logout, tweetsLoading, saveMeta } = this.props;
     return (
       <View style={{ flex: 1, paddingBottom: 60 }}>
         <UserBar user={user} logout={logout} />
@@ -37,7 +37,7 @@ class Timeline extends Component {
             <FlatList
               data={tweets}
               renderItem={tweet => {
-                return <Tweet tweet={tweet} />;
+                return <Tweet tweet={tweet} saveMeta={saveMeta} />;
               }}
               style={{
                 marginTop: 20
@@ -78,7 +78,8 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = {
   fetchTweets,
-  logout
+  logout,
+  saveMeta
 };
 
 export default connect(

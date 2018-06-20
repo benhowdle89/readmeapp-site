@@ -70,7 +70,7 @@ export default function reducer(state = initialState, action) {
             if (tweet.id !== action.id) return tweet;
             return {
               ...tweet,
-              meta
+              meta: action.meta
             };
           })
         ]
@@ -122,6 +122,14 @@ export default function reducer(state = initialState, action) {
     default:
       return state;
   }
+}
+
+export function saveMeta({ id, meta }) {
+  return {
+    type: SAVE_META,
+    id,
+    meta
+  };
 }
 
 export function logout() {

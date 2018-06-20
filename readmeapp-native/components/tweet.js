@@ -12,6 +12,8 @@ import Image from "react-native-scalable-image";
 import styled from "styled-components";
 
 import { ago } from "./../lib/helpers";
+import TweetUser from "./tweet-user";
+import ExternalLink from "./external-link";
 
 const { width } = Dimensions.get("window");
 
@@ -44,6 +46,7 @@ const StyledAgoText = styled.Text`
 
 const StyledUserView = styled.View`
   margin-bottom: 10px;
+  margin-left: 10px;
   flex-grow: 1;
   flex-direction: row;
 `;
@@ -112,39 +115,63 @@ export default class Tweet extends Component {
   }
   render() {
     const {
-      tweet: { item }
+      tweet: { item },
+      saveMeta
     } = this.props;
     return (
       <View>
-        <StyledUserView>
-          <TouchableOpacity onPress={() => Linking.openURL(this._tweetLink())}>
-            <StyledAgoText>{ago(item.created_at)} ago - </StyledAgoText>
-          </TouchableOpacity>
-          <StyledUserNameText>{item.user.name}</StyledUserNameText>
-          <Text>•</Text>
-          <StyledUserScreenNameText>
-            {item.user.screen_name}
-          </StyledUserScreenNameText>
-        </StyledUserView>
-
-        <Hyperlink
-          linkify={linkify}
-          linkDefault={true}
-          linkStyle={{ color: "#2980b9" }}
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            flexWrap: "wrap",
+            alignItems: "center"
+          }}
         >
-          <Text>{this._strippedTweet()}</Text>
-        </Hyperlink>
+          <TweetUser user={item.user} />
+          <StyledUserView>
+            <TouchableOpacity
+              onPress={() => Linking.openURL(this._tweetLink())}
+            >
+              <StyledAgoText>{ago(item.created_at)} ago - </StyledAgoText>
+            </TouchableOpacity>
+            <StyledUserNameText>{item.user.name}</StyledUserNameText>
+            <Text>•</Text>
+            <StyledUserScreenNameText>
+              {item.user.screen_name}
+            </StyledUserScreenNameText>
+          </StyledUserView>
+
+          <Hyperlink
+            linkify={linkify}
+            linkDefault={true}
+            linkStyle={{ color: "#2980b9" }}
+            style={{
+              marginTop: 20
+            }}
+          >
+            <Text>{this._strippedTweet()}</Text>
+          </Hyperlink>
+        </View>
         {this._media() &&
           this._images().map(image => {
             return (
               <Image
                 width={width - 40}
-                style={{ marginTop: 10 }}
+                style={{ marginTop: 10, borderRadius: 8 }}
                 source={{ uri: this._imageUrl(image) }}
                 key={image.media_url}
               />
             );
           })}
+        {this._urls()[0] && (
+          <ExternalLink
+            url={this._urls()[0].expanded_url}
+            id={item.id}
+            meta={item.meta}
+            saveMeta={saveMeta}
+          />
+        )}
       </View>
     );
   }

@@ -74,7 +74,7 @@ module.exports = {
         process.env.API_URL || "http://localhost:3000/"
       ),
       "process.env.TWITTER_CB_URL": JSON.stringify(
-        process.env.TWITTER_CB_URL || "http://localhost:8080"
+        process.env.TWITTER_CB_URL || "http://localhost:8080/callback"
       )
     })
   ],
