@@ -82,7 +82,6 @@ export default function reducer(state = initialState, action) {
       };
     case TOKEN_SUCCESS:
       const tokenData = action.payload.data.data;
-      console.log(tokenData);
       return {
         ...state,
         oAuthToken: tokenData.oAuthToken,
