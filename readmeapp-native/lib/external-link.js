@@ -2,7 +2,6 @@ const { DOMParser } = require("react-native-html-parser");
 import axios from "axios";
 
 export default async url => {
-  if (!/^https/i.test(url)) return;
   let result = {
     externalLink: {
       image: "",

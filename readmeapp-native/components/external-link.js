@@ -20,6 +20,7 @@ export default class ExternalLink extends Component {
   render() {
     if (!this.props.meta) return null;
     const { externalLink } = this.props.meta;
+    if (!externalLink.title) return null;
     return (
       <TouchableOpacity onPress={() => Linking.openURL(externalLink.link)}>
         {externalLink.image && (

@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { ago } from "./../lib/helpers";
 import TweetUser from "./tweet-user";
 import ExternalLink from "./external-link";
+import YouTube from "./youtube";
 
 const { width } = Dimensions.get("window");
 
@@ -73,6 +74,29 @@ export default class Tweet extends Component {
       tweet: { item }
     } = this.props;
     return item.entities && item.entities.urls;
+  }
+  _youtubeURL() {
+    const urls = this._urls();
+    if (!urls) return;
+    const yt = urls.find(u => /^youtu/i.test(u.display_url));
+    return yt;
+  }
+  _videos() {
+    const media = this._media();
+    if (!media) return false;
+    const videos = media.find(m => m.video_info);
+    if (!videos) return false;
+    const {
+      video_info: { variants },
+      media_url_https
+    } = videos;
+    const { url, content_type } = variants.find(v => v.url);
+
+    return {
+      image: media_url_https,
+      source: url,
+      type: content_type
+    };
   }
   _images() {
     const {
@@ -172,6 +196,7 @@ export default class Tweet extends Component {
             saveMeta={saveMeta}
           />
         )}
+        {this._youtubeURL() && <YouTube video={this._youtubeURL()} />}
       </View>
     );
   }
