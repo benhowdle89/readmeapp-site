@@ -146,32 +146,37 @@ export default class Tweet extends Component {
       <View>
         <View
           style={{
-            flex: 1,
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "center"
+            flex: 1
           }}
         >
-          <TweetUser user={item.user} />
-          <StyledUserView>
-            <TouchableOpacity
-              onPress={() => Linking.openURL(this._tweetLink())}
-            >
-              <StyledAgoText>{ago(item.created_at)} ago - </StyledAgoText>
-            </TouchableOpacity>
-            <StyledUserNameText>{item.user.name}</StyledUserNameText>
-            <Text>•</Text>
-            <StyledUserScreenNameText>
-              {item.user.screen_name}
-            </StyledUserScreenNameText>
-          </StyledUserView>
-
+          <View
+            style={{
+              flex: 1,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            <TweetUser user={item.user} />
+            <StyledUserView>
+              <TouchableOpacity
+                onPress={() => Linking.openURL(this._tweetLink())}
+              >
+                <StyledAgoText>{ago(item.created_at)} ago - </StyledAgoText>
+              </TouchableOpacity>
+              <StyledUserNameText>{item.user.name}</StyledUserNameText>
+              <Text>•</Text>
+              <StyledUserScreenNameText>
+                {item.user.screen_name}
+              </StyledUserScreenNameText>
+            </StyledUserView>
+          </View>
           <Hyperlink
             linkify={linkify}
             linkDefault={true}
             linkStyle={{ color: "#2980b9" }}
             style={{
-              marginTop: 20
+              marginTop: 10
             }}
           >
             <Text>{this._strippedTweet()}</Text>
@@ -197,6 +202,7 @@ export default class Tweet extends Component {
           />
         )}
         {this._youtubeURL() && <YouTube video={this._youtubeURL()} />}
+        {/* <Text>{JSON.stringify(this._videos())}</Text> */}
       </View>
     );
   }

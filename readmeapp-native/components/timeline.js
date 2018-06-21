@@ -9,7 +9,6 @@ import { fetchTweets, logout, saveMeta } from "./../lib/reducer";
 import Tweet from "./../components/tweet";
 import UserBar from "./../components/user-bar";
 import Centered from "./../components/centered";
-import Loader from "./../components/loader";
 
 class Timeline extends Component {
   componentWillMount() {
@@ -20,40 +19,35 @@ class Timeline extends Component {
       fetchTweets,
       tweets
     } = this.props;
-    if (!tweets.length)
-      fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id).catch(
-        error => Alert.alert("Uh oh", "Couldn't fetch tweets")
-      );
+    fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id).catch(
+      error => Alert.alert("Uh oh", "Couldn't fetch tweets")
+    );
   }
   render() {
     const { tweets, user, logout, tweetsLoading, saveMeta } = this.props;
     return (
       <View style={{ flex: 1, paddingBottom: 60 }}>
-        <UserBar user={user} logout={logout} />
+        <UserBar user={user} logout={logout} loading={tweetsLoading} />
         <Centered>
-          {tweetsLoading ? (
-            <Loader />
-          ) : (
-            <FlatList
-              data={tweets}
-              renderItem={tweet => {
-                return <Tweet tweet={tweet} saveMeta={saveMeta} />;
-              }}
-              style={{
-                marginTop: 20
-              }}
-              keyExtractor={tweet => tweet.id_str}
-              ItemSeparatorComponent={() => (
-                <View
-                  style={{
-                    height: 1,
-                    backgroundColor: "#eaeaea",
-                    marginVertical: 20
-                  }}
-                />
-              )}
-            />
-          )}
+          <FlatList
+            data={tweets}
+            renderItem={tweet => {
+              return <Tweet tweet={tweet} saveMeta={saveMeta} />;
+            }}
+            style={{
+              marginTop: 20
+            }}
+            keyExtractor={tweet => tweet.id_str}
+            ItemSeparatorComponent={() => (
+              <View
+                style={{
+                  height: 1,
+                  backgroundColor: "#eaeaea",
+                  marginVertical: 20
+                }}
+              />
+            )}
+          />
         </Centered>
       </View>
     );

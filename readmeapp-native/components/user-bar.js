@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { View, Text, Button, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 
+import Loader from "./loader";
+
 const StyledBarView = styled.View`
   flex-direction: row;
   justify-content: space-between;
@@ -24,10 +26,10 @@ export default class UserBar extends Component {
     this.props.logout();
   };
   render() {
-    const { user } = this.props;
+    const { user, loading } = this.props;
     return (
       <StyledBarView>
-        <StyledLogoText>Readme</StyledLogoText>
+        {loading ? <Loader /> : <StyledLogoText>Readme</StyledLogoText>}
         <Text>{user.name}</Text>
         <TouchableOpacity onPress={this._handleSignOut}>
           <StyledLinkText>Sign Out</StyledLinkText>

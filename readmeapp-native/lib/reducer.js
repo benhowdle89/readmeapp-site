@@ -57,9 +57,10 @@ export default function reducer(state = initialState, action) {
         )
       };
     case FETCH_TWEETS_FAIL:
+      const { error } = action;
       return {
         ...state,
-        loading: false,
+        tweetsLoading: false,
         error: "Error while fetching tweets"
       };
     case SAVE_META:
