@@ -9,4 +9,14 @@ const instance = axios.create({
   headers: { cb: TWITTER_CB_URL }
 });
 
+instance.interceptors.response.use(
+  response => {
+    return response;
+  },
+  function(error) {
+    console.log(error);
+    return Promise.reject(error.response);
+  }
+);
+
 export default instance;

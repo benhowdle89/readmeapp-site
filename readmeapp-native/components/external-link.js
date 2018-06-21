@@ -58,7 +58,7 @@ export default class ExternalLink extends Component {
             source={{
               uri: externalLink.image
             }}
-            width={width * 0.3}
+            width={width * 0.4}
           />
         )}
         <StyledMetaView>

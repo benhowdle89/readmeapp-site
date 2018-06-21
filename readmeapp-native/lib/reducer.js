@@ -57,7 +57,6 @@ export default function reducer(state = initialState, action) {
         )
       };
     case FETCH_TWEETS_FAIL:
-      const { error } = action;
       return {
         ...state,
         tweetsLoading: false,
