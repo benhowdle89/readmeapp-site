@@ -1,7 +1,7 @@
 import axios from "axios";
-import { API_URL } from "react-native-dotenv";
+import config from "./environment";
 
-const TWITTER_CB_URL = "https://auth.expo.io/@benhowdle/readmeapp-native";
+const { API_URL, TWITTER_CB_URL } = config;
 
 const instance = axios.create({
   baseURL: API_URL,

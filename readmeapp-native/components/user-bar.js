@@ -19,6 +19,8 @@ const StyledLinkText = styled.Text`
 
 const StyledLogoText = styled.Text`
   color: #7994e5;
+  font-style: italic;
+  letter-spacing: 2px;
 `;
 
 export default class UserBar extends Component {

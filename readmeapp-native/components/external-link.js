@@ -1,7 +1,37 @@
 import React, { Component } from "react";
-import { Linking, TouchableOpacity, Text } from "react-native";
-import externalLinkFetcher from "./../lib/external-link";
+import { Linking, TouchableOpacity, Text, Dimensions } from "react-native";
 import Image from "react-native-scalable-image";
+import styled from "styled-components";
+import externalLinkFetcher from "./../lib/external-link";
+
+const StyledLinkView = styled.TouchableOpacity`
+  background: rgba(40, 41, 46, 0.03);
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+`;
+
+const StyledMetaView = styled.View`
+  padding: 10px;
+  flex: 1;
+`;
+
+const StyledTitleText = styled.Text`
+  font-weight: bold;
+  margin-bottom: 5px;
+`;
+
+const StyledDescriptionText = styled.Text`
+  font-style: italic;
+  margin-bottom: 5px;
+`;
+
+const StyledLinkText = styled.Text`
+  color: #7994e5;
+`;
+
+const { width } = Dimensions.get("window");
 
 export default class ExternalLink extends Component {
   componentDidMount() {
@@ -22,18 +52,23 @@ export default class ExternalLink extends Component {
     const { externalLink } = this.props.meta;
     if (!externalLink.title) return null;
     return (
-      <TouchableOpacity onPress={() => Linking.openURL(externalLink.link)}>
+      <StyledLinkView onPress={() => Linking.openURL(externalLink.link)}>
         {externalLink.image && (
           <Image
             source={{
               uri: externalLink.image
             }}
+            width={width * 0.3}
           />
         )}
-        <Text>{externalLink.title}</Text>
-        <Text>{externalLink.description}</Text>
-        <Text>{externalLink.site}</Text>
-      </TouchableOpacity>
+        <StyledMetaView>
+          <StyledTitleText>{externalLink.title}</StyledTitleText>
+          <StyledDescriptionText>
+            {externalLink.description}
+          </StyledDescriptionText>
+          <StyledLinkText>{externalLink.site}</StyledLinkText>
+        </StyledMetaView>
+      </StyledLinkView>
     );
   }
 }
