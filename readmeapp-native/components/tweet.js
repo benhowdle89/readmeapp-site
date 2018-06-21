@@ -15,6 +15,7 @@ import { ago } from "./../lib/helpers";
 import TweetUser from "./tweet-user";
 import ExternalLink from "./external-link";
 import YouTube from "./youtube";
+import Video from "./video";
 
 const { width } = Dimensions.get("window");
 
@@ -202,7 +203,7 @@ export default class Tweet extends Component {
           />
         )}
         {this._youtubeURL() && <YouTube video={this._youtubeURL()} />}
-        {/* <Text>{JSON.stringify(this._videos())}</Text> */}
+        {this._videos() && <Video video={this._videos()} />}
       </View>
     );
   }
