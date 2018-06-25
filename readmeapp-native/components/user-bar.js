@@ -15,12 +15,15 @@ const StyledBarView = styled.View`
 
 const StyledLinkText = styled.Text`
   color: #2980b9;
+  font-family: Rubik;
 `;
 
 const StyledLogoText = styled.Text`
   color: #7994e5;
   font-style: italic;
   letter-spacing: 2px;
+  font-family: RubikItalic;
+  font-size: 20;
 `;
 
 export default class UserBar extends Component {
@@ -32,7 +35,6 @@ export default class UserBar extends Component {
     return (
       <StyledBarView>
         {loading ? <Loader /> : <StyledLogoText>Readme</StyledLogoText>}
-        <Text>{user.name}</Text>
         <TouchableOpacity onPress={this._handleSignOut}>
           <StyledLinkText>Sign Out</StyledLinkText>
         </TouchableOpacity>

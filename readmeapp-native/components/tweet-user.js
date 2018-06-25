@@ -4,7 +4,7 @@ import Image from "react-native-scalable-image";
 
 const { width } = Dimensions.get("window");
 
-export default ({ user }) => {
+const TweetUser = ({ user }) => {
   const profileImageURL = () => {
     const url = user.profile_image || user.profile_image_url_https || "";
     return url.replace(/_normal/, "");
@@ -23,3 +23,5 @@ export default ({ user }) => {
     </View>
   );
 };
+
+export default TweetUser;

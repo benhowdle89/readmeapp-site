@@ -10,6 +10,7 @@ import Hyperlink from "react-native-hyperlink";
 const linkify = require("linkify-it")();
 import Image from "react-native-scalable-image";
 import styled from "styled-components";
+import unescape from "lodash.unescape";
 
 import { ago } from "./../lib/helpers";
 import TweetUser from "./tweet-user";
@@ -42,8 +43,15 @@ linkify.add("@", {
   }
 });
 
+const StyledTweetText = styled.Text`
+  font-family: Neuton;
+  font-size: 18;
+  line-height: 25;
+`;
+
 const StyledAgoText = styled.Text`
   color: #2980b9;
+  font-family: Rubik;
 `;
 
 const StyledUserView = styled.View`
@@ -56,11 +64,14 @@ const StyledUserView = styled.View`
 const StyledUserNameText = styled.Text`
   margin: 0 5px;
   font-weight: bold;
+  font-family: RubikBold;
+  color: #555;
 `;
 
 const StyledUserScreenNameText = styled.Text`
   margin-left: 5px;
   color: #a7a7a7;
+  font-family: Rubik;
 `;
 
 export default class Tweet extends Component {
@@ -129,7 +140,10 @@ export default class Tweet extends Component {
       const re = new RegExp(url);
       text = text.replace(re, expanded_url);
     });
-    return text;
+    return this._unescape(text);
+  }
+  _unescape(text) {
+    return unescape(text);
   }
   _tweetLink() {
     const {
@@ -152,10 +166,7 @@ export default class Tweet extends Component {
         >
           <View
             style={{
-              flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center"
+              flexDirection: "row"
             }}
           >
             <TweetUser user={item.user} />
@@ -180,7 +191,7 @@ export default class Tweet extends Component {
               marginTop: 10
             }}
           >
-            <Text>{this._strippedTweet()}</Text>
+            <StyledTweetText>{this._strippedTweet()}</StyledTweetText>
           </Hyperlink>
         </View>
         {this._media() &&
