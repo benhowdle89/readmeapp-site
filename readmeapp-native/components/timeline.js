@@ -36,13 +36,14 @@ class Timeline extends Component {
   render() {
     const { tweets, user, logout, tweetsLoading, saveMeta } = this.props;
     return (
-      <View style={{ flex: 1, paddingBottom: 60 }}>
+      <View style={{ flex: 1, paddingBottom: 60, marginBottom: 20 }}>
         <UserBar user={user} logout={logout} loading={tweetsLoading} />
         <Centered>
           <FlatList
             refreshing={tweetsLoading}
             onRefresh={() => this._fetchTweets()}
             data={tweets}
+            initialNumToRender={10}
             renderItem={tweet => {
               return <Tweet tweet={tweet} saveMeta={saveMeta} />;
             }}

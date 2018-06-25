@@ -7,7 +7,7 @@ const { width } = Dimensions.get("window");
 const TweetUser = ({ user }) => {
   const profileImageURL = () => {
     const url = user.profile_image || user.profile_image_url_https || "";
-    return url.replace(/_normal/, "");
+    return url;
   };
   return (
     <View>

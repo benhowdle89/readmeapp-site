@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import {
   View,
   Text,
@@ -74,7 +74,7 @@ const StyledUserScreenNameText = styled.Text`
   font-family: Rubik;
 `;
 
-export default class Tweet extends Component {
+export default class Tweet extends PureComponent {
   _media() {
     const {
       tweet: { item }
