@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
   View,
   Text,
@@ -59,6 +59,7 @@ const StyledUserView = styled.View`
   margin-left: 10px;
   flex-grow: 1;
   flex-direction: row;
+  align-items: center;
 `;
 
 const StyledUserNameText = styled.Text`
@@ -74,7 +75,7 @@ const StyledUserScreenNameText = styled.Text`
   font-family: Rubik;
 `;
 
-export default class Tweet extends PureComponent {
+export default class Tweet extends Component {
   _media() {
     const {
       tweet: { item }
@@ -85,7 +86,8 @@ export default class Tweet extends PureComponent {
     const {
       tweet: { item }
     } = this.props;
-    return item.entities && item.entities.urls;
+    const urls = item.entities && item.entities.urls;
+    return urls;
   }
   _youtubeURL() {
     const urls = this._urls();
@@ -174,8 +176,9 @@ export default class Tweet extends PureComponent {
               <TouchableOpacity
                 onPress={() => Linking.openURL(this._tweetLink())}
               >
-                <StyledAgoText>{ago(item.created_at)} ago - </StyledAgoText>
+                <StyledAgoText>{ago(item.created_at)} ago </StyledAgoText>
               </TouchableOpacity>
+              <Text>•</Text>
               <StyledUserNameText>{item.user.name}</StyledUserNameText>
               <Text>•</Text>
               <StyledUserScreenNameText>
