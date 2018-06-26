@@ -8,6 +8,7 @@
     "expo": "^28.0.0",
     "exponent": "^14.0.0",
     "linkify-it": "^2.0.3",
+    "lodash.unescape": "^4.0.1",
     "lodash.uniqby": "^4.7.0",
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-28.0.0.tar.gz",

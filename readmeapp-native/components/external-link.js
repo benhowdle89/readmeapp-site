@@ -10,6 +10,7 @@ const StyledLinkView = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 10;
 `;
 
 const StyledMetaView = styled.View`
@@ -38,10 +39,13 @@ export default class ExternalLink extends Component {
     if (!this.props.meta) return this.fetchExternalLink();
   }
   async fetchExternalLink() {
+    if (this.props.url.match(/youtube/)) return;
     const result = await externalLinkFetcher(this.props.url).catch(error =>
       console.log(error)
     );
     if (!result) return;
+    if (!result.externalLink.title) return;
+
     this.props.saveMeta({
       id: this.props.id,
       meta: result
@@ -51,6 +55,7 @@ export default class ExternalLink extends Component {
     if (!this.props.meta) return null;
     const { externalLink } = this.props.meta;
     if (!externalLink.title) return null;
+    if (externalLink.link.match(/youtube/)) return null;
     return (
       <StyledLinkView onPress={() => Linking.openURL(externalLink.link)}>
         {externalLink.image && (
@@ -58,7 +63,7 @@ export default class ExternalLink extends Component {
             source={{
               uri: externalLink.image
             }}
-            width={width * 0.3}
+            width={width * 0.4}
           />
         )}
         <StyledMetaView>

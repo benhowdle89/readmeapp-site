@@ -19,7 +19,7 @@ export const initialState = {
   theme: "light"
 };
 
-const TWEETS_TO_STORE = 100;
+const TWEETS_TO_STORE = 50;
 
 export const TOKEN = "TOKEN";
 export const TOKEN_SUCCESS = "TOKEN_SUCCESS";
@@ -34,6 +34,7 @@ export const SET_LAST_FETCHED = "SET_LAST_FETCHED";
 export const LOGOUT = "LOGOUT";
 export const SWITCH_THEME = "SWITCH_THEME";
 export const SAVE_META = "SAVE_META";
+export const RESET_LOADING = "RESET_LOADING";
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -57,7 +58,6 @@ export default function reducer(state = initialState, action) {
         )
       };
     case FETCH_TWEETS_FAIL:
-      const { error } = action;
       return {
         ...state,
         tweetsLoading: false,
@@ -120,9 +120,22 @@ export default function reducer(state = initialState, action) {
         ...state,
         lastFetched: action.lastFetched
       };
+    case RESET_LOADING:
+      return {
+        ...state,
+        tweetsLoading: false,
+        accessTokenLoading: false,
+        tokenRequestLoading: false
+      };
     default:
       return state;
   }
+}
+
+export function resetLoading() {
+  return {
+    type: RESET_LOADING
+  };
 }
 
 export function saveMeta({ id, meta }) {

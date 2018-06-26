@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { AuthSession } from "expo";
 import styled from "styled-components";
 
-import { fetchTweets, logout, saveMeta } from "./../lib/reducer";
+import { fetchTweets, logout, saveMeta, resetLoading } from "./../lib/reducer";
 
 import Tweet from "./../components/tweet";
 import UserBar from "./../components/user-bar";
@@ -12,25 +12,38 @@ import Centered from "./../components/centered";
 
 class Timeline extends Component {
   componentWillMount() {
+    this._fetchTweets();
+  }
+  _fetchTweets() {
     const {
       user,
       oAuthAccessToken,
       oAuthAccessTokenSecret,
       fetchTweets,
-      tweets
+      tweets,
+      resetLoading
     } = this.props;
     fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id).catch(
-      error => Alert.alert("Uh oh", "Couldn't fetch tweets")
+      error => {
+        resetLoading();
+        Alert.alert(
+          "Uh oh",
+          "Couldn't fetch tweets. If the error persists, try signing out and back in again."
+        );
+      }
     );
   }
   render() {
     const { tweets, user, logout, tweetsLoading, saveMeta } = this.props;
     return (
-      <View style={{ flex: 1, paddingBottom: 60 }}>
+      <View style={{ flex: 1, paddingBottom: 60, marginBottom: 20 }}>
         <UserBar user={user} logout={logout} loading={tweetsLoading} />
         <Centered>
           <FlatList
+            refreshing={tweetsLoading}
+            onRefresh={() => this._fetchTweets()}
             data={tweets}
+            initialNumToRender={10}
             renderItem={tweet => {
               return <Tweet tweet={tweet} saveMeta={saveMeta} />;
             }}
@@ -73,7 +86,8 @@ const mapStateToProps = ({
 const mapDispatchToProps = {
   fetchTweets,
   logout,
-  saveMeta
+  saveMeta,
+  resetLoading
 };
 
 export default connect(
