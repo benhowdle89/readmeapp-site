@@ -38,6 +38,9 @@ export default class ExternalLink extends Component {
   componentDidMount() {
     if (!this.props.meta) return this.fetchExternalLink();
   }
+  componentDidUpdate() {
+    if (!this.props.meta) return this.fetchExternalLink();
+  }
   async fetchExternalLink() {
     if (this.props.url.match(/youtube/)) return;
     const result = await externalLinkFetcher(this.props.url).catch(error =>

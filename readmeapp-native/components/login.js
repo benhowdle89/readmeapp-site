@@ -15,7 +15,10 @@ import Loader from "./loader";
 
 const { width } = Dimensions.get("window");
 
-const standardAlert = () => Alert.alert("Uh oh", "Couldn't login with Twitter");
+const standardAlert = error => {
+  console.log(error);
+  Alert.alert("Uh oh", "Couldn't login with Twitter");
+};
 
 const StyledHeroView = styled.View`
   background-color: #7994e5;
