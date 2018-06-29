@@ -10,7 +10,7 @@
               .sign-in
                 el-button(:loading="tokenRequestLoading", type="primary", @click="handleSignIn") Sign in with Twitter
               .apple
-                a(href="https://google.com")
+                a(href="https://itunes.apple.com/us/app/readme/id1400305463?ls=1&mt=8")
                   img(src='../assets/img/app-store.png')
         .screenshot
           img(src='../assets/img/screen.png')
