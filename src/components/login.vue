@@ -55,6 +55,7 @@ export default {
     display: flex
     flex-direction: column
     align-items: center
+    overflow: auto
 
 .screenshot
   @media(max-width: 1200px)
