@@ -73,8 +73,8 @@ export default {
     background-size: cover
     width: 40%
     height: 50%
-    top: calc(100vh - 57%)
-    right: -55px
+    bottom: 2px
+    right: -2px
     overflow: hidden
     .snaps-inners
       width: 87%
