@@ -3,13 +3,13 @@
     el-button.lists-button.mr2(@click="expanded = !expanded")
         icon(glyph="#list")
     .list-panel.absolute.mt1(v-if="expanded")
-        .list-items.p2(v-if="lists.length")
+        .list-items.p2
             .list.mb1
                 el-button(@click="handleSetCurrentList(null)", :class="{ current: currentListId === null }") Home timeline
-            .list.mb1(v-for="list in lists", :key="list.id_str", @click="handleSetCurrentList(list.id_str)")
+            .list.mb1(v-for="list in lists", :key="list.id_str", @click="handleSetCurrentList(list.id_str)", v-if="lists.length")
                 el-button.list-name(:class="{ current: currentListId === list.id_str }") {{ list.name }}
         .center.p2
-            el-button.fetch-lists(:loading="listsLoading", @click="handleFetchLists") Update lists
+            el-button.fetch-lists(:loading="listsLoading", @click="handleFetchLists") Refresh lists
 </template>
 
 <script>
@@ -33,6 +33,11 @@ export default {
     ...mapState(["lists", "listsLoading", "currentListId"])
   },
   components: { Icon },
+  mounted() {
+    if (!this.lists.length) {
+      this.handleFetchLists();
+    }
+  },
   data() {
     return {
       List,
@@ -56,7 +61,7 @@ export default {
 
     .list-panel
         background: #fff
-        z-index: 10
+        z-index: 100
         border-radius: 4px
         border: 1px solid #7994E5
 
