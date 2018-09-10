@@ -9,5 +9,8 @@ export default {
   tokenRequestLoading: false,
   accessTokenLoading: false,
   lastFetched: null,
-  theme: 'light'
-}
+  theme: "light",
+  lists: [],
+  currentListId: null,
+  listsLoading: false
+};

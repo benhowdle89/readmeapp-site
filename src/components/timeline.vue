@@ -5,39 +5,47 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import { haveFetchedInWindow, fetchAgainIn } from './../helpers'
-import Tweet from './tweet'
+import { mapActions, mapState } from "vuex";
+import { haveFetchedInWindow, fetchAgainIn } from "./../helpers";
+import Tweet from "./tweet";
 export default {
   methods: {
-    ...mapActions(['fetchTweets']),
-    async handleFetchTweets () {
-      await this.fetchTweets().catch(error => this.$message.error('Error fetching tweets'))
+    ...mapActions(["fetchTweets"]),
+    async handleFetchTweets() {
+      await this.fetchTweets().catch(error =>
+        this.$message.error(
+          "Error fetching tweets, try again in a few minutes."
+        )
+      );
     }
   },
-  data () {
+  data() {
     return {
       now: Date.now(),
       timer: null
-    }
+    };
   },
   computed: {
-    ...mapState(['tweets', 'lastFetched']),
-    canFetchTweets () { return !haveFetchedInWindow(this.lastFetched, this.now) },
-    fetchAgainIn () {
-      const again = fetchAgainIn(this.lastFetched, this.now)
-      return `Refresh again in ${again} minute${again > 1 ? 's' : ''}`
+    ...mapState(["tweets", "lastFetched"]),
+    canFetchTweets() {
+      return !haveFetchedInWindow(this.lastFetched, this.now);
     },
+    fetchAgainIn() {
+      const again = fetchAgainIn(this.lastFetched, this.now);
+      return `Refresh again in ${again} minute${again > 1 ? "s" : ""}`;
+    }
   },
-  mounted () {
-    this.canFetchTweets && this.handleFetchTweets()
-    this.timer = setInterval(() => { this.now = Date.now() }, 1000)
+  mounted() {
+    this.canFetchTweets && this.handleFetchTweets();
+    this.timer = setInterval(() => {
+      this.now = Date.now();
+    }, 1000);
   },
-  destroyed () {
-    clearInterval(this.timer)
+  destroyed() {
+    clearInterval(this.timer);
   },
   components: { Tweet }
-}
+};
 </script>
 
 <style lang="sass">

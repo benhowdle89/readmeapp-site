@@ -31,7 +31,13 @@ export default {
       errors
     };
   },
-  async fetchTweets(accessToken, accessTokenSecret, userId, latestId) {
+  async fetchTweets(
+    accessToken,
+    accessTokenSecret,
+    userId,
+    latestId,
+    currentListId
+  ) {
     const {
       data: { data },
       errors
@@ -39,7 +45,22 @@ export default {
       accessToken,
       accessTokenSecret,
       userId,
-      latestId
+      latestId,
+      currentListId
+    });
+    return {
+      data,
+      errors
+    };
+  },
+  async fetchLists(accessToken, accessTokenSecret, userId) {
+    const {
+      data: { data },
+      errors
+    } = await instance.post("?type=lists", {
+      accessToken,
+      accessTokenSecret,
+      userId
     });
     return {
       data,
