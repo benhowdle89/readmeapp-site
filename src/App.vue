@@ -3,27 +3,27 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
-  name: 'app',
+  name: "app",
   computed: {
-    ...mapState(['theme'])
+    ...mapState(["theme"])
   },
   methods: {
-    changeThemeClass () {
-      return document.body.classList.toggle('dark')
+    changeThemeClass() {
+      return document.body.classList.toggle("dark");
     }
   },
-  mounted () {
-    const isDark = document.body.classList.contains('dark')
-    if (this.theme === 'dark' && !isDark) return this.changeThemeClass()
+  mounted() {
+    const isDark = document.body.classList.contains("dark");
+    if (this.theme === "dark" && !isDark) return this.changeThemeClass();
   },
   watch: {
-    'theme' () {
-      this.changeThemeClass()
+    theme() {
+      this.changeThemeClass();
     }
   }
-}
+};
 </script>
 
 <style lang="sass">
@@ -34,7 +34,7 @@ export default {
   transition: background .4s ease
   box-sizing: border-box
 html
-  font-size: 12px
+  font-size: 16px
 body
   font-family: 'Neuton', serif
   font-size: 1rem

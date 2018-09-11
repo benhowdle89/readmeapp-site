@@ -9,45 +9,47 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import externalLinkFetcher from './../helpers/external-link'
+import { mapActions } from "vuex";
+import externalLinkFetcher from "./../helpers/external-link";
 export default {
   props: {
     url: String,
     id: Number,
     meta: Object
   },
-  async mounted () {
-    !this.meta && this.fetchExternalLinks() 
+  async mounted() {
+    !this.meta && this.fetchExternalLinks();
   },
   methods: {
-    ...mapActions(['saveMeta']),
-    async fetchExternalLinks () {
-      const result = await externalLinkFetcher(this.url)
-      if (!result) return
+    ...mapActions(["saveMeta"]),
+    async fetchExternalLinks() {
+      const result = await externalLinkFetcher(this.url);
+      if (!result) return;
       Object.keys(result).forEach(k => {
-        this[k] = result[k]
-      })
+        this[k] = result[k];
+      });
       this.saveMeta({
         id: this.id,
         meta: result
-      })
+      });
     }
   },
   data() {
-    return this.meta || { 
-      externalLink: {
-        image: '',
-        title: '',
-        description: '',
-        site: '',
-        link: '',
-      },
-      showExternal: false,
-      showExtImage: false
-    }
+    return (
+      this.meta || {
+        externalLink: {
+          image: "",
+          title: "",
+          description: "",
+          site: "",
+          link: ""
+        },
+        showExternal: false,
+        showExtImage: false
+      }
+    );
   }
-}
+};
 </script>
 
 <style lang="sass">
@@ -62,6 +64,13 @@ export default {
   padding-right: 1em
   display: block
   text-decoration: none
+  @media(max-width: 1200px)
+    display: flex
+    height: auto
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 1.2em
 
 .extImg
   width: 200px
@@ -70,6 +79,13 @@ export default {
   position: absolute
   top: 0
   left: 0
+  @media(max-width: 1200px)
+    position: relative
+    width: 100%
+    height: 200px
+    overflow: hidden
+    text-align: center
+    margin-bottom: 1rem
 
 .extImg img
   position: absolute
@@ -79,6 +95,11 @@ export default {
   min-width: 100%
   border-top-left-radius: 4px
   border-bottom-left-radius: 4px
+  @media(max-width: 1200px)
+    position: relative
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    margin: auto
 
 .extTitle
   font-family: 'Rubik', sans-serif
@@ -95,7 +116,10 @@ export default {
   bottom: 1em
   font-size: .84rem
   padding-right: 2rem
-  word-break: break-all  
+  word-break: break-all
+  @media(max-width: 1200px)
+    position: relative
+    bottom: 0
 
 .extDescription
   font-style: italic
