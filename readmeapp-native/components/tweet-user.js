@@ -17,7 +17,8 @@ const TweetUser = ({ user }) => {
           borderRadius: 8
         }}
         source={{
-          uri: profileImageURL()
+          uri: profileImageURL(),
+          cache: "only-if-cached"
         }}
       />
     </View>

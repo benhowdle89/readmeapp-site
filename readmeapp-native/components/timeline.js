@@ -21,23 +21,26 @@ class Timeline extends Component {
       oAuthAccessTokenSecret,
       fetchTweets,
       tweets,
-      resetLoading
+      resetLoading,
+      currentListId
     } = this.props;
-    fetchTweets(oAuthAccessToken, oAuthAccessTokenSecret, user.id).catch(
-      error => {
-        resetLoading();
-        Alert.alert(
-          "Uh oh",
-          "Couldn't fetch tweets. If the error persists, try signing out and back in again."
-        );
-      }
-    );
+    fetchTweets(
+      oAuthAccessToken,
+      oAuthAccessTokenSecret,
+      user.id,
+      currentListId
+    ).catch(error => {
+      resetLoading();
+      Alert.alert(
+        "Uh oh",
+        "Couldn't fetch tweets. If the error persists, try signing out and back in again."
+      );
+    });
   }
   render() {
     const { tweets, user, logout, tweetsLoading, saveMeta } = this.props;
     return (
-      <View style={{ flex: 1, paddingBottom: 60, marginBottom: 20 }}>
-        <UserBar user={user} logout={logout} loading={tweetsLoading} />
+      <View style={{ flex: 1, marginBottom: 20, paddingTop: 60 }}>
         <Centered>
           <FlatList
             refreshing={tweetsLoading}
@@ -47,6 +50,7 @@ class Timeline extends Component {
             renderItem={tweet => {
               return <Tweet tweet={tweet} saveMeta={saveMeta} />;
             }}
+            removeClippedSubviews={true}
             style={{
               marginTop: 20
             }}
@@ -62,6 +66,7 @@ class Timeline extends Component {
             )}
           />
         </Centered>
+        <UserBar user={user} logout={logout} loading={tweetsLoading} />
       </View>
     );
   }
@@ -72,14 +77,16 @@ const mapStateToProps = ({
   oAuthAccessToken,
   oAuthAccessTokenSecret,
   tweets,
-  tweetsLoading
+  tweetsLoading,
+  currentListId
 }) => {
   return {
     user,
     oAuthAccessToken,
     oAuthAccessTokenSecret,
     tweets,
-    tweetsLoading
+    tweetsLoading,
+    currentListId
   };
 };
 

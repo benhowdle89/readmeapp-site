@@ -16,7 +16,10 @@ export const initialState = {
   tokenRequestLoading: false,
   accessTokenLoading: false,
   lastFetched: null,
-  theme: "light"
+  theme: "light",
+  lists: [],
+  listsLoading: false,
+  currentListId: null
 };
 
 const TWEETS_TO_STORE = 50;
@@ -30,11 +33,16 @@ export const ACCESS_TOKEN_FAIL = "ACCESS_TOKEN_FAIL";
 export const FETCH_TWEETS = "FETCH_TWEETS";
 export const FETCH_TWEETS_SUCCESS = "FETCH_TWEETS_SUCCESS";
 export const FETCH_TWEETS_FAIL = "FETCH_TWEETS_FAIL";
+export const FETCH_LISTS = "FETCH_LISTS";
+export const FETCH_LISTS_SUCCESS = "FETCH_LISTS_SUCCESS";
+export const FETCH_LISTS_FAIL = "FETCH_LISTS_FAIL";
 export const SET_LAST_FETCHED = "SET_LAST_FETCHED";
 export const LOGOUT = "LOGOUT";
 export const SWITCH_THEME = "SWITCH_THEME";
 export const SAVE_META = "SAVE_META";
 export const RESET_LOADING = "RESET_LOADING";
+export const SET_CURRENT_LIST_ID = "SET_CURRENT_LIST_ID";
+export const SWITCH_TIMELINE = "SWITCH_TIMELINE";
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -42,6 +50,23 @@ export default function reducer(state = initialState, action) {
       return initialState;
     case SWITCH_THEME:
       return { ...state, theme: theme === "light" ? "dark" : "light" };
+    case FETCH_LISTS:
+      return {
+        ...state,
+        listsLoading: true
+      };
+    case FETCH_LISTS_SUCCESS:
+      return {
+        ...state,
+        listsLoading: false,
+        lists: JSON.parse(action.payload.data.data.lists)
+      };
+    case FETCH_LISTS_FAIL:
+      return {
+        ...state,
+        listsLoading: false,
+        error: "Error while fetching lists"
+      };
     case FETCH_TWEETS:
       return {
         ...state,
@@ -75,6 +100,17 @@ export default function reducer(state = initialState, action) {
             };
           })
         ]
+      };
+    case SWITCH_TIMELINE:
+      return {
+        ...state,
+        tweets: [],
+        lastFetched: null
+      };
+    case SET_CURRENT_LIST_ID:
+      return {
+        ...state,
+        currentListId: action.listId
       };
     case TOKEN:
       return {
@@ -125,7 +161,8 @@ export default function reducer(state = initialState, action) {
         ...state,
         tweetsLoading: false,
         accessTokenLoading: false,
-        tokenRequestLoading: false
+        tokenRequestLoading: false,
+        listsLoading: false
       };
     default:
       return state;
@@ -180,7 +217,42 @@ export function requestAccessToken(token, tokenSecret, verifier) {
   };
 }
 
-export function fetchTweets(accessToken, accessTokenSecret, userId, latestId) {
+export function setCurrentList(listId) {
+  return {
+    type: SET_CURRENT_LIST_ID,
+    listId
+  };
+}
+
+export function switchTimeline() {
+  return {
+    type: SWITCH_TIMELINE
+  };
+}
+
+export function fetchLists(accessToken, accessTokenSecret, userId) {
+  return {
+    type: FETCH_LISTS,
+    payload: {
+      request: {
+        url: "?type=lists",
+        method: "POST",
+        data: {
+          accessToken,
+          accessTokenSecret,
+          userId
+        }
+      }
+    }
+  };
+}
+
+export function fetchTweets(
+  accessToken,
+  accessTokenSecret,
+  userId,
+  currentListId
+) {
   return {
     type: FETCH_TWEETS,
     payload: {
@@ -191,7 +263,7 @@ export function fetchTweets(accessToken, accessTokenSecret, userId, latestId) {
           accessToken,
           accessTokenSecret,
           userId,
-          latestId
+          currentListId
         }
       }
     }

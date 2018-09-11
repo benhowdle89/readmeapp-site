@@ -3,6 +3,7 @@ import { View, Text, Button, TouchableOpacity } from "react-native";
 import styled from "styled-components";
 
 import Loader from "./loader";
+import Lists from "./lists";
 
 const StyledBarView = styled.View`
   flex-direction: row;
@@ -11,6 +12,14 @@ const StyledBarView = styled.View`
   border-bottom-color: rgba(121, 148, 229, 0.23);
   border-bottom-width: 1;
   padding: 20px 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+`;
+
+const ButtonsView = styled.View`
+  display: flex;
+  flex-direction: row;
 `;
 
 const StyledLinkText = styled.Text`
@@ -35,9 +44,17 @@ export default class UserBar extends Component {
     return (
       <StyledBarView>
         {loading ? <Loader /> : <StyledLogoText>Readme</StyledLogoText>}
-        <TouchableOpacity onPress={this._handleSignOut}>
-          <StyledLinkText>Sign Out</StyledLinkText>
-        </TouchableOpacity>
+        <ButtonsView>
+          <Lists />
+          <TouchableOpacity
+            style={{
+              marginLeft: 10
+            }}
+            onPress={this._handleSignOut}
+          >
+            <StyledLinkText>Sign Out</StyledLinkText>
+          </TouchableOpacity>
+        </ButtonsView>
       </StyledBarView>
     );
   }

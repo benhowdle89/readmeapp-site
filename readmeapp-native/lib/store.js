@@ -4,7 +4,6 @@ import axiosMiddleware from "redux-axios-middleware";
 import reducer, { initialState } from "./reducer";
 import api from "./api";
 import storage from "./storage";
-import { all } from "rsvp";
 
 const STORAGE_KEY = "readmeapp";
 
@@ -17,8 +16,14 @@ const configureStore = async () => {
     ...deserialisedStore,
     tweetsLoading: initialState.tweetsLoading,
     tokenRequestLoading: initialState.tokenRequestLoading,
-    accessTokenLoading: initialState.accessTokenLoading
+    accessTokenLoading: initialState.accessTokenLoading,
+    listsLoading: initialState.listsLoading
   };
+  Object.keys(initialState).forEach(initialKey => {
+    if (!(initialKey in builtStore)) {
+      builtStore[initialKey] = initialState[initialKey];
+    }
+  });
   const store = createStore(
     reducer,
     builtStore,
@@ -32,7 +37,8 @@ const configureStore = async () => {
         return ![
           "tweetsLoading",
           "tokenRequestLoading",
-          "accessTokenLoading"
+          "accessTokenLoading",
+          "listsLoading"
         ].includes(key);
       })
       .reduce((accum, curr) => {
